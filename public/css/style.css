@@ -1,0 +1,33 @@
+body {
+	background-color: #E4E4E4;
+	font-size: 16px;
+}
+
+ul#tag-holder {
+	list-style: none;
+	padding-left: 0;
+}
+
+#tag-container{
+	background-color: #fff;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #ccd0d2;
+  border-radius: 4px;
+}
+
+#tag-container label {
+	font-weight: normal;
+  font-style: italic;
+  font-size: 12px;
+}
+
+#published {
+	margin-bottom: 20px;
+	max-width: 60px;
+}
+
+.fa-trash {
+	cursor: pointer;
+	margin-right: 8px;
+}
