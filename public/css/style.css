@@ -3,6 +3,10 @@ body {
 	font-size: 16px;
 }
 
+#content {
+	height: 300px;
+}
+
 /*
 	Tags
 */

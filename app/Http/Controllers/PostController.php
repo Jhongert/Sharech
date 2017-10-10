@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Tag;
+
+use Validator;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\DB;
 
@@ -48,39 +51,45 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        /*DB::table('posts')->insert(
-            ['title' => $request->title,
-             'content' => $request->content,
-             'user_id' => \Auth::User()->id
-            ]
-        );*/
+        $validator = Validator::make($request->all(),[
+            'title' => 'required|max:56',
+            'content' => 'required'
+        ]);
 
-        /*DB::beginTransaction();
-        try{
+        if ($validator->fails()){
+            return 'error';
+        } else {
+
             $post = new Post;
-        
+            
             $post->title = $request->title;
             $post->content = $request->content;
             $post->published = ($request->published == "true") ? 1 : 0;
+            $post->url = str_replace(" ", "-",$request->title);
             $post->user_id = \Auth::User()->id;
-            $post->save();
 
-            $tags = array();
-            foreach($request->tags as $name) {
-              array_push($tags, array("post_id" => $post->id, "name" => $name));
+            DB::beginTransaction();
+            try{
+                
+                $post->save();
+
+                $tags = array();
+                
+                if (count($request->tags) > 0){
+                    foreach($request->tags as $name) {
+                        array_push($tags, array("post_id" => $post->id, "name" => $name));
+                    }
+                    $tag = new Tag;
+                    $tag::insert($tags);
+                }
+
+                DB::commit();
+                return 'ok';
+            } catch(Exception $e) {
+               DB::rollback();
+                return 'error';
             }
-
-            $tag = new Tag;
-            $tag::insert($tags);
-
-            DB::commit();
-            return 'ok';
-        } catch(Exception $e) {
-            DB::rollback();
-            return 'error';
-        }*/
-
-        return 'error';
+        }
     }
 
     /**
