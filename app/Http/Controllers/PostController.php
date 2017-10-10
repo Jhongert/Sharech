@@ -30,7 +30,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts');
+        $posts = \App\Post::all();
+
+        return view('posts',['posts' => $posts]);
     }
 
     /**
@@ -65,7 +67,7 @@ class PostController extends Controller
             $post->title = $request->title;
             $post->content = $request->content;
             $post->published = ($request->published == "true") ? 1 : 0;
-            $post->url = str_replace(" ", "-",$request->title);
+            $post->url = strtolower(str_replace(" ", "-",$request->title));
             $post->user_id = \Auth::User()->id;
 
             DB::beginTransaction();

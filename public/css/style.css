@@ -3,6 +3,20 @@ body {
 	font-size: 16px;
 }
 
+.post-container {
+	padding: 10px;
+    background-color: #fff;
+    box-shadow: 4px 4px 10px lightslategrey;
+    margin-bottom: 20px;
+}
+
+.post-container h3 {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+/* text area to type the content of the posts */
 #content {
 	height: 300px;
 }
@@ -31,8 +45,8 @@ ul#tag-holder li {
 
 #tag-container label {
 	font-weight: normal;
-  font-style: italic;
-  font-size: 12px;
+  	font-style: italic;
+  	font-size: 12px;
 }
 
 
