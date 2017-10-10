@@ -3,9 +3,18 @@ body {
 	font-size: 16px;
 }
 
+/*
+	Tags
+*/
 ul#tag-holder {
 	list-style: none;
 	padding-left: 0;
+	overflow: hidden;
+}
+
+ul#tag-holder li {
+	float: left;
+	width: 50%;
 }
 
 #tag-container{
@@ -13,7 +22,7 @@ ul#tag-holder {
 	padding: 10px;
 	margin-bottom: 20px;
 	border: 1px solid #ccd0d2;
-  border-radius: 4px;
+  	border-radius: 4px;
 }
 
 #tag-container label {
@@ -22,7 +31,12 @@ ul#tag-holder {
   font-size: 12px;
 }
 
-#published {
+
+
+/* End Tags */
+
+/* this id holds the published checkbox*/
+#status {
 	margin-bottom: 20px;
 	max-width: 60px;
 }
@@ -30,4 +44,12 @@ ul#tag-holder {
 .fa-trash {
 	cursor: pointer;
 	margin-right: 8px;
+}
+
+#msg-container {
+	overflow: hidden;
+	-webkit-transition: height 2s;
+	transition: height 2s;
+	/*display: none;*/
+	margin-bottom: 10px;
 }

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -45,9 +48,39 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        //return Request::json(["data" => "data"]);
-        return $data;
+        /*DB::table('posts')->insert(
+            ['title' => $request->title,
+             'content' => $request->content,
+             'user_id' => \Auth::User()->id
+            ]
+        );*/
+
+        /*DB::beginTransaction();
+        try{
+            $post = new Post;
+        
+            $post->title = $request->title;
+            $post->content = $request->content;
+            $post->published = ($request->published == "true") ? 1 : 0;
+            $post->user_id = \Auth::User()->id;
+            $post->save();
+
+            $tags = array();
+            foreach($request->tags as $name) {
+              array_push($tags, array("post_id" => $post->id, "name" => $name));
+            }
+
+            $tag = new Tag;
+            $tag::insert($tags);
+
+            DB::commit();
+            return 'ok';
+        } catch(Exception $e) {
+            DB::rollback();
+            return 'error';
+        }*/
+
+        return 'error';
     }
 
     /**

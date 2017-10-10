@@ -2,19 +2,31 @@
 
 namespace App;
 
-use App\User;
-use App\Comment;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+	/**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'content', 'user_id', 'published'
+    ];
+
     public function comment()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany('App\Comment');
+    }
+
+    public function tag()
+    {
+        return $this->hasMany('App\Tag');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo('App\User');
     }
 }

@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
       <form id="snippetForm">
         <div class="form-group">
           <input type="text" id="title" name="title" class="form-control" placeholder="Title" autofocus >
@@ -19,10 +19,10 @@
       </form>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div id="tag-container">
         <h4>Tags</h4>
-        <div class="input-group input-group-sm">
+        <div class="input-group input-group-md">
           <input type="text" class="form-control" name="tags" id="tags">
           <span class="input-group-btn">
             <button class="btn btn-default" type="button" id="add-tag">Add</button>
@@ -32,16 +32,17 @@
         <ul id="tag-holder">
         </ul>
       </div>
-      <div class="input-group" id="published">
+      <div class="input-group" id="status">
         <label class="form-control">Published</label>
         <span class="input-group-addon">
-          <input type="checkbox" aria-label="...">
+          <input type="checkbox" id="published" aria-label="...">
         </span>
       </div><!-- /input-group -->
 
       <div class="form-group">
-          <button class="btn btn-primary" id="save">Save</button>
-        </div>
+        <div id="msg-container"><p id="msg"></p></div>
+        <button class="btn btn-primary" id="save">Save</button>
+      </div>
     </div>
   </div>
 </div>
@@ -73,12 +74,10 @@
           var text = $(this).parent().text();
           tags.splice(tags.indexOf(text), 1);
           $(this).parent().remove();
-          console.log(tags);
         });
 
 
         $('#save').on('click', function(event){
-            event.preventDefault();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -86,22 +85,36 @@
             });
 
             var data = {
-                id:'3',
-                name: 'jhon'
+                title: $('#title').val().trim(),
+                content: $('#content').val().trim(),
+                published: $('#published').is(":checked"),
+                tags: tags
             };
 
-            /*$.post('/post/store', data, function(data){
-                console.log(data)
-            })*/
             $.ajax({
                 type: 'POST',
                 url: '/post/store',
                 data: data,
                 success: function(data){
-                    console.log(data);
+                    showMsg(data);
                 }
-            })
-        })
+            });
+        });
+
+        function showMsg(status){
+          $('#msg-container').css({'height':'58px'});
+          if(status == 'ok'){
+            var msg = $('#msg').text('Data has been saved successfully.');
+            msg.addClass('alert alert-success');
+
+          } else {
+            var msg = $('#msg').text('Oops, An error occurred.');
+            msg.addClass('alert alert-danger');
+          }
+          window.setTimeout(function(){
+              $('#msg-container').css('height', 0);
+            }, 3000);
+        }
     });
 </script>
 @endsection
