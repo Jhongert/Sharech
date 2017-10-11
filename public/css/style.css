@@ -25,7 +25,7 @@ body {
 
 /* Login form */
 
-#login-form {
+#login-form, #signup-form {
 	background-color: #fff;
 	padding: 0 10px 10px;
 	border: 1px solid #ccd0d2;
@@ -35,7 +35,7 @@ body {
     margin: 0 auto;
 }
 
-#login-form h1{
+#login-form h1, #signup-form h1{
 	margin-bottom: 20px;
 }
 
