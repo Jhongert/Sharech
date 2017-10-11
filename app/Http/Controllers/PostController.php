@@ -28,9 +28,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $posts = \App\Post::all();
+        $posts = \App\Post::with('user')->get();
 
         return view('posts',['posts' => $posts]);
     }
@@ -65,6 +66,7 @@ class PostController extends Controller
             $post = new Post;
             
             $post->title = $request->title;
+            $post->description = $request->description;
             $post->content = $request->content;
             $post->published = ($request->published == "true") ? 1 : 0;
             $post->url = strtolower(str_replace(" ", "-",$request->title));
@@ -100,9 +102,10 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($url)
     {
-        //
+        $post = \App\Post::where('url', '=', $url)->firstOrFail();
+        return view('post', ['post' => $post]);
     }
 
     /**

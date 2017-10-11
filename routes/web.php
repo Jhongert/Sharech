@@ -23,6 +23,8 @@ Route::get('/posts', 'PostController@index');
 
 Route::get('post/create', 'PostController@create');
 
+Route::get('post/{url}', 'PostController@show');
+
 Route::get('/developers', function () {
     return view('developers');
 });

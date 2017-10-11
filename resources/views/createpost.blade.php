@@ -1,5 +1,9 @@
     @extends('layouts.app')
 
+    @section('css')
+        <link href="{{ asset('css/prism.css') }}" rel="stylesheet">
+    @endsection
+
     @section('content')
     <div class="container">
         <div class="row">
@@ -8,18 +12,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8">
-                <form id="snippetForm">
-                    <div class="form-group">
-                        <input type="text" id="title" name="title" class="form-control" placeholder="Title (Max 56 characters)" autofocus>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="content" name="content" class="form-control" placeholder="Content"></textarea>
-                    </div>
-                </form>
+            <div class="col-md-7">
+                <div class="form-group">
+                    <textarea id="content" name="content" placeholder="Content"></textarea>
+                </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-5">
+
+                <div class="form-group">
+                    <input type="text" id="title" name="title" class="form-control" placeholder="Title (Max 56 characters)" autofocus>
+                </div>
+
+                <div class="form-group">
+                    <textarea id="description" name="description" class="form-control" placeholder="Description"></textarea>
+                </div>
+
                 <div id="tag-container">
                     <h4>Tags</h4>
                     <div class="input-group input-group-md">
@@ -53,6 +61,19 @@
     @endsection
 
     @section('page-script')
+    <script src="{{ asset('js/prism.js') }}"></script>
+    <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+    <!-- <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script> -->
+    <script>
+        tinymce.init({
+            selector: '#content',
+            branding: false,
+            height : 400,
+            menubar: false,
+            plugins: "codesample",
+            toolbar: "undo redo | cut copy paste | bold italic underline strikethrough | bullist numlist | codesample"
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function(){
             var tags = [];
@@ -82,8 +103,9 @@
 
 
             $('#save').on('click', function(event){
+
                 if(validate()){
-                
+
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -92,7 +114,8 @@
 
                     var data = {
                         title: $('#title').val().trim(),
-                        content: $('#content').val().trim(),
+                        description: $('#description').val().trim(),
+                        content: tinymce.get('content').getContent(),
                         published: $('#published').is(":checked"),
                         tags: tags
                     };
@@ -130,16 +153,26 @@
                     return false;
                 }
 
-                 // Check for empty content
-                var content = $('#content');
-               
-                if (content.val().trim() == ""){
+                //check for empty description
+                var description = $('#description');
+                if (description.val().trim() == ""){
                     var $l = $('<label class="text-danger small">');
-                    $l.text('Enter the content');
-                    content.after($l).focus();
+                    $l.text('Enter the description');
+                    $('#description').after($l);
                     return false;
                 }
 
+                 // Check for empty content
+                //var content = $('#content');
+               var content = tinymce.get('content').getContent();
+                if (content.trim() == ""){
+                    var $l = $('<label class="text-danger small">');
+                    $l.text('Enter the content');
+                    $('#content').after($l);
+                    return false;
+                }
+
+                
                 return true;
             }
 

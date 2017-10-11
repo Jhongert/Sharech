@@ -15,12 +15,12 @@ class Post extends Model
         'title', 'content', 'user_id', 'published'
     ];
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany('App\Comment');
     }
 
-    public function tag()
+    public function tags()
     {
         return $this->hasMany('App\Tag');
     }

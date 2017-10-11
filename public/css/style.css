@@ -3,23 +3,43 @@ body {
 	font-size: 16px;
 }
 
-.post-container {
+#post {
+	background-color: #fff;
+	padding: 10px;
+}
+
+/* class post-itme represent a post in a list of posts*/
+.post-item {
 	padding: 10px;
     background-color: #fff;
     box-shadow: 4px 4px 10px lightslategrey;
     margin-bottom: 20px;
+    height: 200px;
 }
 
-.post-container h3 {
+.post-item h3 {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 }
 
-/* text area to type the content of the posts */
-#content {
-	height: 300px;
+/* Login form */
+
+#login-form {
+	background-color: #fff;
+	padding: 0 10px 10px;
+	border: 1px solid #ccd0d2;
+  	border-radius: 4px;
+  	min-height: 370px;
+    max-width: 440px;
+    margin: 0 auto;
 }
+
+#login-form h1{
+	margin-bottom: 20px;
+}
+
+
 
 /*
 	Tags
@@ -68,6 +88,5 @@ ul#tag-holder li {
 	overflow: hidden;
 	-webkit-transition: height 2s;
 	transition: height 2s;
-	/*display: none;*/
 	margin-bottom: 10px;
 }
