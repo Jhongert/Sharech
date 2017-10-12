@@ -3,6 +3,26 @@ body {
 	font-size: 16px;
 }
 
+.navbar-inverse {
+	background-color: #0D2233;
+}
+
+.navbar-toggle {
+	float:left;
+	margin-left: 10px;
+	border: none;
+}
+
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus, 
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, 
+.navbar-inverse .navbar-nav>.open>a:hover {
+	background-color: #0D2233 !important;
+}
+
+.user {
+	margin: 0;
+}
+
 #post {
 	background-color: #fff;
 	padding: 10px;
