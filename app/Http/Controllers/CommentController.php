@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+
+use Validator;
+
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -35,7 +38,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -46,7 +49,27 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'content' => 'required',
+            'post_id' => 'required'
+        ]);
+
+        
+        if ($validator->fails()){
+            return 'error';
+        } else {
+
+            $comment = new Comment;
+
+            $comment->content = $request->content;
+            $comment->post_id = $request->post_id;
+            $comment->user_id = \Auth::User()->id;
+
+            $comment->save();
+            
+            $userName = \Auth::User()->name;
+            return $userName;
+        }
     }
 
     /**

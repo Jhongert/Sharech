@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Tag;
+use App\Comment;
 
 use Validator;
 use Illuminate\Http\Request;
@@ -104,8 +105,10 @@ class PostController extends Controller
      */
     public function show($url)
     {
-        $post = \App\Post::where('url', '=', $url)->firstOrFail();
-        return view('post', ['post' => $post]);
+        $post = \App\Post::with(['tags', 'user'])->where('url', '=', $url)->firstOrFail();
+        $comments = \App\Comment::with('user')->where('post_id', '=', $post->id)->get();
+
+        return view('post', array('post' => $post, 'comments' => $comments));
     }
 
     /**
