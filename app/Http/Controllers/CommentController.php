@@ -67,8 +67,8 @@ class CommentController extends Controller
 
             $comment->save();
             
-            $userName = \Auth::User()->name;
-            return $userName;
+            $user = \Auth::User();
+            return $user;
         }
     }
 

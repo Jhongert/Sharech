@@ -32,7 +32,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = \App\Post::with('user')->get();
+        $posts = \App\Post::with('user')->where('published', '=', '1')->orderBy('created_at', 'desc')->get();
 
         return view('posts',['posts' => $posts]);
     }
@@ -106,6 +106,7 @@ class PostController extends Controller
     public function show($url)
     {
         $post = \App\Post::with(['tags', 'user'])->where('url', '=', $url)->firstOrFail();
+        
         $comments = \App\Comment::with('user')->where('post_id', '=', $post->id)->get();
 
         return view('post', array('post' => $post, 'comments' => $comments));

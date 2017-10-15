@@ -29,6 +29,9 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
 
+    // Array of defaults images
+    protected $avatar = array('blank.jpg', 'missing.jpg', 'default.jpg' );
+
     /**
      * Create a new controller instance.
      *
@@ -62,10 +65,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $pos = rand(0,2);
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'avatar' => $this->avatar[$pos],
         ]);
     }
 }

@@ -51,7 +51,7 @@
                         <li><a href="{{ url('/developers') }}"><i class="fa fa-users" aria-hidden="true"></i> Developers</a></li>
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-                            <li><a href="{{ route('register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>
+                            <li><a href="{{ route('register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign up</a></li>
                         @else
                             <li><a href="{{ url('/post/create') }}"><i class="fa fa-plus" aria-hidden="true"></i> New post</a></li>
 
@@ -82,8 +82,9 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
+        <div id="main" class="container">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->

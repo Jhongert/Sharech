@@ -31,9 +31,6 @@ Route::get('/developers', function () {
 
 Route::post('/post/store', 'PostController@store');
 
+// comments route
 Route::resource('comment', 'CommentController');
 Auth::routes();
-
-#Route::get('/createpost', 'PostController@index')->name('createpost');
-
-#Route::get('/profile', 'UserController@index')->name('profile');
