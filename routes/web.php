@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('home');
 });
@@ -30,6 +31,8 @@ Route::get('/developers', function () {
 });
 
 Route::post('/post/store', 'PostController@store');
+
+Route::post('posts/search/{term}', 'PostController@search');
 
 // comments route
 Route::resource('comment', 'CommentController');

@@ -21,7 +21,7 @@ class PostController extends Controller
          * All users can see posts
          * Only authenticated users can create, store, edit, update and destroy posts
          */        
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'search']]);
         
     }
     /**
@@ -106,7 +106,7 @@ class PostController extends Controller
     public function show($url)
     {
         $post = \App\Post::with(['tags', 'user'])->where('url', '=', $url)->firstOrFail();
-        
+
         $comments = \App\Comment::with('user')->where('post_id', '=', $post->id)->get();
 
         return view('post', array('post' => $post, 'comments' => $comments));
@@ -144,5 +144,10 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function search($term){
+        $posts = \App\Post::where('title', 'like', '%' . $term . '%')->get(['title', 'url']);
+        return $posts->toJson();
     }
 }

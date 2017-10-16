@@ -23,9 +23,23 @@ body {
 	background-color: #0D2233 !important;
 }
 
+/* Search bar */
 #search-bar {
 	margin-bottom: 10px;
 }
+
+.eac-item b {
+	color: blue;
+}
+/*.easy-autocomplete {
+	width: 90% !important;
+	display: inline-block;
+}
+
+#search-bar button {
+	vertical-align: unset;
+}*/
+/* End search bar*/
 
 .user {
 	margin: 0;
