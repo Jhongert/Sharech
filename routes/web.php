@@ -34,4 +34,7 @@ Route::post('posts/search/{term}', 'PostController@search');
 
 // comments route
 Route::resource('comment', 'CommentController');
+
+// tags route
+Route::get('/tag/{name}', 'TagController@show');
 Auth::routes();
