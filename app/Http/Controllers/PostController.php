@@ -147,7 +147,10 @@ class PostController extends Controller
     }
 
     public function search($term){
-        $posts = \App\Post::where('title', 'like', '%' . $term . '%')->get(['title', 'url']);
+        $posts = \App\Post::where('title', 'like', '%' . $term . '%')
+            ->where('published', '=', '1' )
+            ->take(8)
+            ->get(['title', 'url']);
         return $posts->toJson();
     }
 }

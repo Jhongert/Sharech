@@ -5,13 +5,11 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-sm-8">
+    <div class="row ">
+        <div class="col-md-6">
             <div id="search-bar" >
                 <input type="text" id="search" class="form-control" placeholder="Search for...">
-       
-                 <button class="btn btn-default" id="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
-            </div>
+             </div>
         </div>
     </div>
 
@@ -34,53 +32,38 @@
 @section('page-script')
     <script src="{{ asset('js/jquery.easy-autocomplete.min.js') }}"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function(){ 
 
-           
+            var options = {
+                url: function(phrase) {
+                    return "posts/search/" + phrase;
+                },
 
-        var options = {
-            url: function(phrase) {
-                return "posts/search/" + phrase;
-            },
+                getValue: function(element) {
+                    return element.title;
+                   
+                },
 
-            getValue: function(element) {
-                return element.title;
-               
-            },
+                ajaxSettings: {
+                    headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    dataType: "json",
+                    method: "POST",
+                    data: {
+                        dataType: "json"
+                    }
+                },
 
-            ajaxSettings: {
-                headers:{ 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                dataType: "json",
-                method: "POST",
-                data: {
-                    dataType: "json"
+                requestDelay: 200,
+
+                list: {
+                    onChooseEvent: function() {
+                        var value = $('#search').getSelectedItemData().url;
+                        window.location = '/post/' + value;
+                    }   
                 }
-            },
+            };
 
-            requestDelay: 200,
-
-            template: {
-                type: "custom",
-                method: function(value, item) {
-                    return '<a href="post/' + item.url + '">' + value + '</a>';  
-                }
-            },
-
-            list: {
-                onChooseEvent: function() {
-                    var value = $('#search').getSelectedItemData().url;
-                    window.location = '/post/' + value;
-                }   
-            }
-        };
-
-        $("#search").easyAutocomplete(options);
-
-        $('#search').on('keyup', function(event){
-            if(event.keyCode == 13) {
-                alert('ll');
-            }
+            $("#search").easyAutocomplete(options);
         });
-    });
     </script>
 @endsection

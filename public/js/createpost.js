@@ -13,7 +13,8 @@ $(document).ready(function(){
 
     $('#add-tag').on('click', function(){
         var curTag = '';
-        var input = $('#tags').val();
+        var input = $('#input-tags').val();
+
         var arrayTags = input.split(',');
         for(var i = 0; i < arrayTags.length; i++){
             curTag = arrayTags[i].trim().toUpperCase();
@@ -24,7 +25,7 @@ $(document).ready(function(){
                 tags.push(curTag);
             }
         }
-        $('#tags').val('').focus();
+        $('#input-tags').val('').focus();
     });
 
 

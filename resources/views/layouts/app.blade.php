@@ -12,12 +12,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('css')
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -48,7 +49,7 @@
                         <!-- Authentication Links -->
                         <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
                         <li><a href="{{ url('/posts') }}"><i class="fa fa-file-text" aria-hidden="true"></i> Posts</a></li>
-                        <li><a href="{{ url('/developers') }}"><i class="fa fa-users" aria-hidden="true"></i> Developers</a></li>
+                        <!-- <li><a href="{{ url('/developers') }}"><i class="fa fa-users" aria-hidden="true"></i> Developers</a></li> -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
                             <li><a href="{{ route('register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign up</a></li>

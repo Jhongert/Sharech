@@ -31,7 +31,7 @@
                 <div id="tag-container">
                     <h4>Tags</h4>
                     <div class="input-group input-group-md">
-                        <input type="text" class="form-control" name="tags" id="tags">
+                        <input type="text" class="form-control" name="input-tags" id="input-tags">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" id="add-tag">Add</button>
                         </span>

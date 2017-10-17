@@ -1,14 +1,20 @@
 body {
-	background-color: #f1f1f1;
+	/*background-color: #f1f1f1;*/
+	background-color: #fff;
 	font-size: 16px;
+	color: #293033;
 }
 
 #main {
 	padding-top: 20px;
 }
 
-.navbar-inverse {
-	background-color: #0D2233;
+.navbar-default {
+	/*background-color: #0D2233;*/
+	background-color: #f8f8f8;
+	height: 64px;
+	padding-top: 10px;
+	border-bottom: 1px solid #dbdbdb;
 }
 
 .navbar-toggle {
@@ -17,28 +23,38 @@ body {
 	border: none;
 }
 
-.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus, 
+/*.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus, 
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, 
 .navbar-inverse .navbar-nav>.open>a:hover {
-	background-color: #0D2233 !important;
+	background-color: #0D2233 !important;*/
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus, 
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, 
+.navbar-default .navbar-nav>.open>a:hover {
+	background-color: #f8f8f8;
 }
 
+/*a {
+	color: #2477ab;
+}*/
 /* Search bar */
 #search-bar {
-	margin-bottom: 10px;
+	margin-bottom: 15px;
+	height: 36px;
 }
 
-.eac-item b {
+/*.eac-item b {
 	color: blue;
-}
-/*.easy-autocomplete {
-	width: 90% !important;
+}*/
+.easy-autocomplete {
+	width: 100% !important;
+	
 	display: inline-block;
 }
 
-#search-bar button {
-	vertical-align: unset;
-}*/
+#search-bar #search{  
+	width: 100%;
+}
+
 /* End search bar*/
 
 .user {
@@ -48,15 +64,16 @@ body {
 
 /* class post-itme represent a post in a list of posts*/
 #post {
-	background-color: #fff;
+	background-color: #f8f8f8;
 	padding: 20px;
 }
+
 .post-item {
 	padding: 10px;
-    background-color: #fff;
+    background-color: #f8f8f8;
     margin-bottom: 20px;
     height: 240px;
-    border: 1px solid #eae3e3;
+    border: 1px solid #dbdbdb;
 }
 
 .post-item h3 {
@@ -82,9 +99,9 @@ body {
 
 /* Login Sign up forms */
 #login-form, #signup-form {
-	background-color: #fff;
+	background-color: #f8f8f8;
 	padding: 0 10px 10px;
-	border: 1px solid #eae3e3;
+	border: 1px solid #dbdbdb;
   	border-radius: 4px;
   	min-height: 370px;
     max-width: 440px;
