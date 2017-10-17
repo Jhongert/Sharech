@@ -26,9 +26,7 @@ Route::get('post/create', 'PostController@create');
 
 Route::get('post/{url}', 'PostController@show');
 
-Route::get('/developers', function () {
-    return view('developers');
-});
+Route::get('/developer/{name}','UserController@show');
 
 Route::post('/post/store', 'PostController@store');
 

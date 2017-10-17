@@ -8,23 +8,29 @@
     <div class="row ">
         <div class="col-md-6">
             <div id="search-bar" >
-                <input type="text" id="search" class="form-control" placeholder="Search for...">
+                <input type="text" id="search"  placeholder="Search for...">
              </div>
         </div>
     </div>
 
     <div class="row">
-    	@foreach ($posts as $post)
-        	<div class="col-md-6">
-        		<div class="post-item">
-                    
-                    <a class="avatar" href="#"><img class="img-circle" src="{{ asset('images/' . $post->user->avatar) }}"> <span>{{ $post->user->name }}</span></a>
+        @if (count($posts) > 0)
+        	@foreach ($posts as $post)
+            	<div class="col-md-6">
+            		<div class="post-item">
+                        
+                        <a class="avatar" href="{{ url('/developer/' . $post->user->name) }}"><img class="img-circle" src="{{ asset('images/' . $post->user->avatar) }}"> <span>{{ $post->user->name }}</span></a>
 
-            		<a href="{{ url('/post/' . $post->url )}}"><h3>{{ $post->title }}</h3></a>
-            		<p>{{ $post->description }}</p>
+                		<a href="{{ url('/post/' . $post->url )}}"><h3>{{ $post->title }}</h3></a>
+                		<p>{{ $post->description }}</p>
+                	</div>
             	</div>
-        	</div>
-        @endforeach
+            @endforeach
+        @else
+            <div class="col-sm-12">
+                <h1 class="text-center">Sorry, we could not find any post!</h1>
+            </div>
+        @endif
     </div>
 
 @endsection
@@ -36,7 +42,7 @@
 
             var options = {
                 url: function(phrase) {
-                    return "posts/search/" + phrase;
+                    return "/posts/search/" + phrase;
                 },
 
                 getValue: function(element) {
