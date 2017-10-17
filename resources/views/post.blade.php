@@ -28,7 +28,7 @@
 
 					@foreach ($comments as $comment)
                         <div class="comment-item">
-                            <a class="avatar" href="{{ url('/developer/' . $comment->user->name) }}"><img class="img-circle" src="{{ asset('images/' . $comment->user->avatar) }}"> <span>{{ $comment->user->name }}</span></a>
+                            <a class="avatar" href="{{ url('/developer/' . $comment->user->name) }}"><img class="img-circle" src="{{ asset('avatar/' . $comment->user->avatar) }}"> <span>{{ $comment->user->name }}</span></a>
 
 						
 						    <div>{{ $comment->content }}</div>

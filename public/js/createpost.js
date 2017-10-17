@@ -106,7 +106,6 @@ $(document).ready(function(){
             return false;
         }
 
-        
         return true;
     }
 
@@ -118,7 +117,7 @@ $(document).ready(function(){
         $('#msg-container').css({'height':'58px'});
 
         if(status == 'ok'){
-            msg.text('Data has been saved successfully.');
+            msg.text('Your post has been saved.');
             msg.addClass('alert alert-success');
 
         } else {

@@ -63,7 +63,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('/profile') }}"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+                                    <li><a href="{{ url('/user/profile') }}"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li>
                                         <a href="{{ route('logout') }}"

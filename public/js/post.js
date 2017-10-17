@@ -48,7 +48,7 @@ $('#save-post').on('click', function(){
 
                 // create an img element for user photo
                 var $img = $('<img class="img-circle">');
-                $img.attr('src', '../images/' + data.avatar);
+                $img.attr('src', '../avatar/' + data.avatar);
 
                 // create a span element for the user name
                 var $span = $('<span>').text(data.name);

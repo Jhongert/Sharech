@@ -32,9 +32,14 @@ Route::post('/post/store', 'PostController@store');
 
 Route::post('posts/search/{term}', 'PostController@search');
 
-// comments route
+// Tomments route
 Route::resource('comment', 'CommentController');
 
-// tags route
+// Tags route
 Route::get('/tag/{name}', 'TagController@show');
+
+// User rout
+Route::get('/user/profile', 'UserController@profile');
+Route::post('/user/image', 'UserController@imageUpload');
+
 Auth::routes();

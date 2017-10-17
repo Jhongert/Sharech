@@ -95,7 +95,7 @@ body {
 
 
 /* Login Sign up forms */
-#login-form, #signup-form {
+#login-form, #signup-form{
 	background-color: #f8f8f8;
 	padding: 0 10px 10px;
 	border: 1px solid #dbdbdb;
@@ -110,7 +110,18 @@ body {
 	margin-bottom: 20px;
 }
 
+/* Change picture and password*/
+#user-avatar, #changepassword-form{
+	background-color: #f8f8f8;
+	padding: 0 10px 10px;
+	border: 1px solid #dbdbdb;
+  	border-radius: 4px;
+    margin: 20px 0;
+}
 
+#user-avatar img {
+	margin-bottom: 4px;
+}
 
 /*
 	Tags input
