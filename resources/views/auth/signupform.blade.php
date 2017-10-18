@@ -3,7 +3,7 @@
     <form  method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus placeholder="Name">
+            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus placeholder="User name">
 
             @if ($errors->has('name'))
                 <span class="help-block">

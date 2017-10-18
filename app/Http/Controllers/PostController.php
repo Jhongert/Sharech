@@ -118,9 +118,16 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        //
+        $post = \App\Post::where('id', '=', $id)->firstOrFail();
+
+        $user_id = \Auth::User()->id;
+
+         if($post->user_id != $user_id){
+             return abort(401);
+         }
+        return $post;
     }
 
     /**

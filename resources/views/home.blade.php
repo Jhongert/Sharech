@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+@endsection
+
 @section('content')
 
     <div class="row">
@@ -32,7 +36,44 @@
                 @include('auth.signupform')
             </div>
         @else
-            <h1>Dashboard</h1>
+            <table  class="tablesorter display compact">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date created</th>
+                        <th>Published</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+            @if (count($posts) > 0 )
+                @foreach ($posts as $post)
+                    <tr>
+                        <td>{{ $post->title }}</td>
+                        <td>{{ date("F j, Y, g:i a", strtotime($post->created_at)) }}</td>
+                        <td>{{ $post->published == '1' ? 'Yes' : 'No'}}</td>
+                        <td><a href="/post/edit/{{ $post->id }}" class="btn btn-default btn-sm btn-edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                    </tr>
+                @endforeach
+            @endif
+            </table>
+
+            @section('page-script')
+                <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        // datatable config
+                        $('table').DataTable({
+                            "columnDefs": [
+                                { "orderable": false, "targets": [2,3] }
+                              ],
+                            order: [[ 0, "asc" ]],
+                            info: false,
+                            paging: false,
+                        });
+                    });
+                </script>
+            @endsection
         @endif
     </div>
 

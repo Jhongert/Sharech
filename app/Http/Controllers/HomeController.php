@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['index']]);
     }
 
     /**
@@ -23,6 +23,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if (\Auth::check())
+        {
+            $user_id = \Auth::User()->id;
+
+            $posts = \App\Post::with('user')
+                ->where('user_id', '=', $user_id)
+                ->orderBy('created_at', 'desc')->get();
+
+            return view('home',['posts' => $posts]);
+
+        } else {
+            return view('home');
+        }
+        
     }
 }

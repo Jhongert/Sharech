@@ -11,28 +11,22 @@
 |
 */
 
+// Home route
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
 
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/home', function () {
-    return view('home');
-});
-
+// Post route
 Route::get('/posts', 'PostController@index');
-
 Route::get('post/create', 'PostController@create');
-
 Route::get('post/{url}', 'PostController@show');
+Route::get('/post/edit/{id}', 'PostController@edit');
+Route::post('/post/store', 'PostController@store');
+Route::post('posts/search/{term}', 'PostController@search');
+
 
 Route::get('/developer/{name}','UserController@show');
 
-Route::post('/post/store', 'PostController@store');
-
-Route::post('posts/search/{term}', 'PostController@search');
-
-// Tomments route
+// Comments route
 Route::resource('comment', 'CommentController');
 
 // Tags route
