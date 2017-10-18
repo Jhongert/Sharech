@@ -41,5 +41,6 @@ Route::get('/tag/{name}', 'TagController@show');
 // User rout
 Route::get('/user/profile', 'UserController@profile');
 Route::post('/user/image', 'UserController@imageUpload');
+Route::post('/user/password', 'UserController@changePassword');
 
 Auth::routes();

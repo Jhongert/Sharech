@@ -6,9 +6,12 @@ use App\Post;
 use App\User;
 use Image;
 
-//use Validator;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+
 
 //use Illuminate\Support\Facades\DB;
 
@@ -40,14 +43,39 @@ class UserController extends Controller
         return view('profile');
     }
 
+    public function changePassword(Request $request){
+        $validator = Validator::make($request->all(),[
+            'oldPassword' => 'bail|required',
+            'password' => 'bail|required|string|min:6|confirmed'
+        ]);
+
+        if ($validator->fails()){
+             return redirect('user/profile')
+                        ->withErrors($validator);
+        } else {
+            $user = \Auth::User();
+            if (Hash::check($request->oldPassword, $user->password)){
+                $user->password = Hash::make($request->password);
+                $user->save();
+
+                return back()
+                    ->with('passwordOk','Your password has been changed.');
+            } else {
+                return back()
+                    ->with('wrongPassword','Your old password is not valid.');
+            }
+
+        }
+    }
+
     public function imageUpload(Request $request){
         // Validate image file
         $this->validate($request, [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Get the file
-         $image = $request->file('image');
+        $image = $request->file('image');
 
         // Get current user
         $user = \Auth::User();
@@ -55,14 +83,7 @@ class UserController extends Controller
         // Array of default avatar
         $avatar = array('blank.jpg', 'missing.jpg', 'default.jpg' );
 
-        // Check if current user has a default avatar
-        // If true, create a new name for the avatar
-        // If false, use the same name for the avatar and replace the current picture
-        //if(in_array($user->avatar, $avatar)){
-            $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-        //} else{
-        //    $input['imagename'] = $user->avatar;
-       //}
+        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
      
    
         $destinationPath = public_path('/avatar');
@@ -70,16 +91,12 @@ class UserController extends Controller
         $img->resize(200, 200, function ($constraint) {
             $constraint->aspectRatio();
         })->save($destinationPath.'/'.$input['imagename']);
-
-
-        
         
         $user->avatar = $input['imagename'];
         $user->save();
 
         return back()
-            ->with('success','Image Upload successful')
-            ->with('imageName',$input['imagename']);
+            ->with('imageOk','Image Upload successful');
     }
 
     public function show($name)
