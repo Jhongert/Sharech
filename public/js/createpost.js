@@ -1,26 +1,30 @@
-
-tinymce.init({
-    selector: '#content',
-    branding: false,
-    height : 400,
-    menubar: false,
-    plugins: "codesample",
-    toolbar: "undo redo | cut copy paste | bold italic underline strikethrough | bullist numlist | codesample"
-});
-
 $(document).ready(function(){
+    tinymce.init({
+        selector: '#content',
+        branding: false,
+        height : 440,
+        menubar: false,
+        plugins: "codesample",
+        toolbar: "undo redo | cut copy paste | bold italic underline strikethrough | bullist numlist | codesample"
+    });
+
     var tags = [];
+    
+    $('.tagItem').each(function(index){
+        tags.push($(this).text().trim());
+    });
 
     $('#add-tag').on('click', function(){
         var curTag = '';
         var input = $('#input-tags').val();
 
         var arrayTags = input.split(',');
+
         for(var i = 0; i < arrayTags.length; i++){
             curTag = arrayTags[i].trim().toUpperCase();
             if( curTag != "" && !tags.includes(curTag) ){
                 var li = $('<li>');
-                li.html('<i class="fa fa-trash" aria-hidden="true"></i>' + curTag);
+                li.addClass('tagItem').html('<i class="fa fa-trash" aria-hidden="true"></i>' + curTag);
                 $('#tag-holder').append(li);
                 tags.push(curTag);
             }
@@ -40,12 +44,6 @@ $(document).ready(function(){
 
         if(validate()){
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
             var data = {
                 title: $('#title').val().trim(),
                 description: $('#description').val().trim(),
@@ -54,12 +52,29 @@ $(document).ready(function(){
                 tags: tags
             };
 
+            var type = 'POST';
+            var url = '/post/store';
+
+            var id = $(this).data('id');
+            if( id != ''){
+                type = 'PUT'
+                url = '/post/' + id;
+                data.id = id;
+            } 
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
             $.ajax({
-                type: 'POST',
-                url: '/post/store',
+                type: type,
+                url: url,
                 data: data,
                 success: function(data){
-                    showMsg(data);
+                    console.log(data);
+                    //showMsg(data);
                 }
             });
         }

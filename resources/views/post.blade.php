@@ -18,7 +18,7 @@
                             <ul>
                                 <li class="tag"><i class="fa fa-tag" aria-hidden="true"></i></li>
                             @foreach ($post->tags as $tag)
-                                <li class="tag"><a href="{{ url('/tag/' . $tag->name)}}">{{ $tag->name }}</a></li>
+                                <li class="tag"><a href="{{ url('/tag/' . $tag->name)}}">{{$tag->name}}</a></li>
                             @endforeach
                             </ul>
                         </div>

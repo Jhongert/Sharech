@@ -8,24 +8,30 @@
     
         <div class="row">
             <div class="col-sm-12">
-                <h1>Create post</h1>
+                @if($post->id == "")
+                    <h3>Create post</h3>
+                @else
+                    <h3>Edit post</h3>
+                @endif
             </div>
         </div>
         <div class="row">
             <div class="col-md-7">
                 <div class="form-group">
-                    <textarea id="content" name="content" placeholder="Content"></textarea>
+                    <textarea id="content" name="content" placeholder="Content">{{ htmlentities($post->content) }}</textarea>
                 </div>
             </div>
 
             <div class="col-md-5">
 
                 <div class="form-group">
-                    <input type="text" id="title" name="title" class="form-control" placeholder="Title (Max 56 characters)" autofocus>
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" class="form-control" placeholder="Title (Max 56 characters)" autofocus value="{{ $post->title }}">
                 </div>
 
                 <div class="form-group">
-                    <textarea id="description" name="description" class="form-control" placeholder="Description"></textarea>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" class="form-control" placeholder="Description">{{$post->description}}</textarea>
                 </div>
 
                 <div id="tag-container">
@@ -38,14 +44,22 @@
                     </div>
                     <label>Separate tags with comma</label>
 
-                    <ul id="tag-holder"></ul>
+                    <ul id="tag-holder">
+                        @foreach($post->tags as $tag)
+                            <li class="tagItem"><i class="fa fa-trash" aria-hidden="true"></i>{{$tag->name}}</li>
+                        @endforeach
+                    </ul>
 
                 </div>
 
                 <div class="input-group" id="status">
                     <label class="form-control">Published</label>
                     <span class="input-group-addon">
-                        <input type="checkbox" id="published" aria-label="...">
+                        <input type="checkbox" id="published" aria-label="..." 
+                            @if($post->published == 1)
+                               checked  
+                            @endif
+                        >
                     </span>
                 </div><!-- /input-group -->
 
@@ -53,7 +67,7 @@
                     <div id="msg-container">
                         <p id="msg"></p>
                     </div>
-                    <button class="btn btn-primary" id="save">Save</button>
+                    <button class="btn btn-primary" id="save" data-id="{{ $post->id }}">Save</button>
                 </div>
             </div>
         </div>
@@ -62,6 +76,6 @@
 
     @section('page-script')
         <script src="{{ asset('js/prism.js') }}"></script>
-        <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+        <script src="{{ asset('js/tinymce/tinymce.js') }}"></script>
         <script src="{{ asset('js/createpost.js') }}"></script>
     @endsection

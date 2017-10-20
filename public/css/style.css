@@ -139,7 +139,7 @@ ul#tag-holder li {
 
 #tag-container{
 	background-color: #fff;
-	padding: 10px;
+	padding: 0 10px;
 	margin-bottom: 20px;
 	border: 1px solid #ccd0d2;
   	border-radius: 4px;
@@ -157,7 +157,7 @@ ul#tag-holder li {
 
 /* this id holds the published checkbox*/
 #status {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	max-width: 60px;
 }
 

@@ -12,6 +12,10 @@
 */
 
 // Home route
+Route::get('/test', function(){
+	return view('test');
+});
+
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
@@ -22,7 +26,7 @@ Route::get('post/{url}', 'PostController@show');
 Route::get('/post/edit/{id}', 'PostController@edit');
 Route::post('/post/store', 'PostController@store');
 Route::post('posts/search/{term}', 'PostController@search');
-
+Route::put('/post/{id}', 'PostController@update');
 
 Route::get('/developer/{name}','UserController@show');
 

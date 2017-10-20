@@ -44,7 +44,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('createpost');
+        $post = array('id' => '', 'title' => '', 'content' => '', 'description' => '', 'tags' => [], 'published' => false);
+
+        return view('createpost', ['post' => (object) $post]);
     }
 
     /**
@@ -57,7 +59,8 @@ class PostController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'title' => 'bail|required|max:56',
-            'content' => 'required'
+            'content' => 'required',
+            'description' => 'required'
         ]);
 
         if ($validator->fails()){
@@ -120,14 +123,14 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = \App\Post::where('id', '=', $id)->firstOrFail();
+        $post = \App\Post::with('tags')->where('id', '=', $id)->firstOrFail();
 
         $user_id = \Auth::User()->id;
 
          if($post->user_id != $user_id){
              return abort(401);
          }
-        return $post;
+        return view('createpost', ['post' =>  $post]);
     }
 
     /**
@@ -137,9 +140,66 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Post $post, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'title' => 'bail|required|max:56',
+            'content' => 'required',
+            'description' => 'required'
+        ]);
+
+        if ($validator->fails()){
+            return 'validator';
+        } else {
+
+            // get the post that we want to update
+            $post = Post::find($id);
+
+            // Verify that the user loged in is the woner of this post
+            // If is not, then abort with a 401
+            $user_id = \Auth::User()->id;
+            if($post->user_id != $user_id){
+                return abort(401);
+            }
+
+            // Set the values
+            $post->title = $request->title;
+            $post->description = $request->description;
+            $post->content = $request->content;
+            $post->published = ($request->published == "true") ? 1 : 0;
+            $post->url = strtolower(str_replace(" ", "-",$request->title));
+            $post->user_id = \Auth::User()->id;
+
+
+            // Begin transaction
+            DB::beginTransaction();
+            try{
+                
+                // Save the post
+                $post->save();
+
+                // Delete the existing tags form database
+                $deletedRows = Tag::where('post_id', '=', $id)->delete();
+
+                // If there are tags, create an array of tags and insert to the database
+                $tags = array();
+                
+                if (count($request->tags) > 0){
+                    foreach($request->tags as $name) {
+                        array_push($tags, array("post_id" => $post->id, "name" => $name));
+                    }
+
+                    $tag = new Tag;
+                    $tag::insert($tags);
+                }
+
+                DB::commit();
+                return 'ok';
+            } catch(Exception $e) {
+               DB::rollback();
+                return 'catch';
+            }
+        } 
     }
 
     /**
