@@ -73,8 +73,7 @@ $(document).ready(function(){
                 url: url,
                 data: data,
                 success: function(data){
-                    console.log(data);
-                    //showMsg(data);
+                    showMsg(data);
                 }
             });
         }
