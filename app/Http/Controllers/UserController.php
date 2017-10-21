@@ -11,8 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+require '../vendor/autoload.php';
 
 $s3 = Aws\S3\S3Client::factory();
+
 $bucket = getenv('S3_BUCKET_NAME')?: die('No "S3_BUCKET" config var in found in env!');
 
 //use Illuminate\Support\Facades\DB;
