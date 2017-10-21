@@ -84,8 +84,10 @@ class UserController extends Controller
         $avatar = array('blank.jpg', 'missing.jpg', 'default.jpg' );
 
         $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-     
-   
+        $destinationPath = public_path('/avatar');
+        
+        return back()->with('uploaded', $destinationPath);
+
         $destinationPath = public_path('/avatar');
         $img = Image::make($image->getRealPath());
         $img->resize(200, 200, function ($constraint) {
