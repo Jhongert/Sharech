@@ -87,22 +87,16 @@ class UserController extends Controller
         
 
 
-        $destinationPath = public_path('/avatar');
-
-        
-
-        return back()->with('uploaded', $_SERVER['DOCUMENT_ROOT']);
-
-        //return back()->with('uploaded', $destinationPath . ', ' . $image->getRealPath());
-
-        
+        $destinationPath = public_path('/avatar/');
 
 
         $img = Image::make($image->getRealPath());
 
+        return back()->with('uploaded', 'make');
+
         $img->resize(200, 200, function ($constraint) {
             $constraint->aspectRatio();
-        })->save($destinationPath.'/'.$input['imagename']);
+        })->save($destinationPath . $input['imagename']);
         
         $user->avatar = $input['imagename'];
         $user->save();
