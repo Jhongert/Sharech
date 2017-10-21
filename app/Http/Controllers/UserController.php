@@ -89,10 +89,14 @@ class UserController extends Controller
 
         $destinationPath = public_path('/avatar/');
 
+        if(move_uploaded_file($image->getRealPath(),$destinationPath . $input['imagename'])) {
+            return back()->with('uploaded', 'ok');
+        } else {
+            return back()->with('uploaded', 'error');
+        }
 
         $img = Image::make($image->getRealPath());
 
-        return back()->with('uploaded', 'make');
 
         $img->resize(200, 200, function ($constraint) {
             $constraint->aspectRatio();
