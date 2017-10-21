@@ -85,14 +85,20 @@ class UserController extends Controller
 
         $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
         
+
+
         $destinationPath = public_path('/avatar');
 
         
-        return back()->with('uploaded', $destinationPath . ', ' . $image->getRealPath());
 
-        //$destinationPath = public_path('/avatar');
+        return back()->with('uploaded', $_SERVER['DOCUMENT_ROOT']);
+
+        //return back()->with('uploaded', $destinationPath . ', ' . $image->getRealPath());
+
+        
+
+
         $img = Image::make($image->getRealPath());
-
 
         $img->resize(200, 200, function ($constraint) {
             $constraint->aspectRatio();
@@ -102,7 +108,7 @@ class UserController extends Controller
         $user->save();
 
         return back()
-            ->with('imageOk','Image Upload successful');
+            ->with('uploaded','Image Upload successful');
     }
 
     public function show($name)
