@@ -81,7 +81,7 @@ class UserController extends Controller
         $user = \Auth::User();
 
         // Array of default avatar
-        $avatar = array('blank.jpg', 'missing.jpg', 'default.jpg' );
+        //$avatar = array('blank.jpg', 'missing.jpg', 'default.jpg' );
 
         $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
         
@@ -89,11 +89,11 @@ class UserController extends Controller
 
         $destinationPath = public_path('/avatar/' . $input['imagename']);
 
-        if(move_uploaded_file($image->getRealPath(), $destinationPath)) {
-            return back()->with('uploaded', $destinationPath);
-        } else {
-            return back()->with('uploaded', 'error');
-        }
+        // if(move_uploaded_file($image->getRealPath(), $destinationPath)) {
+        //     return back()->with('uploaded', $destinationPath);
+        // } else {
+        //     return back()->with('uploaded', 'error');
+        // }
 
         $img = Image::make($image->getRealPath());
 
