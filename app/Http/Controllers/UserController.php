@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
+$s3 = Aws\S3\S3Client::factory();
+$bucket = getenv('S3_BUCKET_NAME')?: die('No "S3_BUCKET" config var in found in env!');
 
 //use Illuminate\Support\Facades\DB;
 
@@ -80,29 +82,22 @@ class UserController extends Controller
         // Get current user
         $user = \Auth::User();
 
-        // Array of default avatar
-        //$avatar = array('blank.jpg', 'missing.jpg', 'default.jpg' );
 
-        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+        $imagename = time().'.'.$image->getClientOriginalExtension();
         
-
-
-        $destinationPath = public_path('/avatar/' . $input['imagename']);
-
-        // if(move_uploaded_file($image->getRealPath(), $destinationPath)) {
-        //     return back()->with('uploaded', $destinationPath);
-        // } else {
-        //     return back()->with('uploaded', 'error');
-        // }
+        $destinationPath = public_path('/avatar/' . $imagename);
 
         $img = Image::make($image->getRealPath());
 
 
         $img->resize(200, 200, function ($constraint) {
             $constraint->aspectRatio();
-        })->save($destinationPath . $input['imagename']);
+        });
+
+        $upload = $s3->upload($bucket, $imagename, $img, 'rb', 'public-read');
+        //->save($destinationPath . $input['imagename']);
         
-        $user->avatar = $input['imagename'];
+        $user->avatar = $imagename;
         $user->save();
 
         return back()
