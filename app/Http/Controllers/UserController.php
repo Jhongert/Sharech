@@ -87,10 +87,10 @@ class UserController extends Controller
         
 
 
-        $destinationPath = public_path('/avatar/');
+        $destinationPath = public_path('/avatar/' . $input['imagename']);
 
-        if(move_uploaded_file($image->getRealPath(),$destinationPath . $input['imagename'])) {
-            return back()->with('uploaded', 'ok');
+        if(move_uploaded_file($image->getRealPath(), $destinationPath)) {
+            return back()->with('uploaded', $destinationPath);
         } else {
             return back()->with('uploaded', 'error');
         }
