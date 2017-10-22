@@ -85,42 +85,42 @@ class UserController extends Controller
         ]);
 
         // Get the file
-        // $image = $request->file('image')->store(
-        //     'avatar', 's3'
-        // );
+        $image = $request->file('image')->store(
+            'avatar', 's3'
+        );
 
-        $image = $request->file('image');
+         return back()
+            ->with('uploaded','Image Upload successful');
 
-        // $image = Image::make($image)->resize(200,200);
-        // $path = $image->store('avatar', 's3');
+        // Get current user
+        $user = \Auth::User();
+
+
         $imagename = time().'.'.$image->getClientOriginalExtension();
         
-       // $destinationPath = public_path('/avatar/' . $imagename);
+        $destinationPath = public_path('/avatar/' . $imagename);
 
         $img = Image::make($image->getRealPath());
 
+
         $img->resize(200, 200, function ($constraint) {
-             $constraint->aspectRatio();
+            $constraint->aspectRatio();
         });
 
-        $img = $img->stream();
-        $path = Storage::disk('s3')->put('avatar/' . $imagename, $img->__toString());
-        
+        Storage::disk('local')->putFile('avatar',$img);
 
-        // return back()
-        //     ->with('uploaded',$imagename . ', ' . $path);
+        return back()
+            ->with('uploaded','Image Upload successful');
 
 
-        //$upload = $s3->upload($bucket, $imagename, $img, 'rb', 'public-read');
+        $upload = $s3->upload($bucket, $imagename, $img, 'rb', 'public-read');
         //->save($destinationPath . $input['imagename']);
         
-         // Get current user
-        $user = \Auth::User();
         $user->avatar = $imagename;
         $user->save();
 
         return back()
-             ->with('uploaded','Image Uploaded successfully!');
+            ->with('uploaded','Image Upload successful');
     }
 
     public function show($name)

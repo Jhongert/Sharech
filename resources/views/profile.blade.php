@@ -22,7 +22,7 @@
 					</div>
 				@endif
 
-            	<img src="{{ asset('avatar/' . \Auth::User()->avatar) }}" >
+            	<img src="{{ "https://s3.amazonaws.com/radiantimages/avatar/" . \Auth::User()->avatar }}" >
 				<form method="post" action="/user/image" enctype="multipart/form-data">
 					{{ csrf_field() }}
 			        <div class="form-group">
