@@ -11,11 +11,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-require '../vendor/autoload.php';
 
-$s3 = Aws\S3\S3Client::factory();
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Storage;
 
-$bucket = getenv('S3_BUCKET_NAME')?: die('No "S3_BUCKET" config var in found in env!');
+//$s3 = \Storage::disk('s3');
+
+//require ('../vendor/autoload.php');
+
+//$s3 = Aws\S3\S3Client::factory();
+
+//$bucket = getenv('S3_BUCKET_NAME')?: die('No "S3_BUCKET" config var in found in env!');
 
 //use Illuminate\Support\Facades\DB;
 
@@ -72,14 +78,19 @@ class UserController extends Controller
         }
     }
 
-    public function imageUpload(Request $request){
+    public function imageUpload(Request $request, Filesystem $filesystem){
         // Validate image file
         $this->validate($request, [
             'image' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Get the file
-        $image = $request->file('image');
+        $image = $request->file('image')->store(
+            'avatar', 's3'
+        );
+
+         return back()
+            ->with('uploaded','Image Upload successful');
 
         // Get current user
         $user = \Auth::User();
@@ -95,6 +106,12 @@ class UserController extends Controller
         $img->resize(200, 200, function ($constraint) {
             $constraint->aspectRatio();
         });
+
+        Storage::disk('local')->putFile('avatar',$img);
+
+        return back()
+            ->with('uploaded','Image Upload successful');
+
 
         $upload = $s3->upload($bucket, $imagename, $img, 'rb', 'public-read');
         //->save($destinationPath . $input['imagename']);
