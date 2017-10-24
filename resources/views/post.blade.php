@@ -2,6 +2,7 @@
 
  @section('css')
     <link href="{{ asset('css/prism.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jssocials.css') }}" rel="stylesheet">
  @endsection
 
 @section('content')
@@ -12,6 +13,9 @@
         		<h1>{{ $post->title }}</h1>
         		<p>{{ $post->description }}</p>
                 <div>{!! $post->content !!}</div>
+                
+                <div id="share" class="text-center"></div>
+
 				<div id="comments-container">
                     @if (count($post->tags) > 0)
                         <div id="tags">
@@ -57,4 +61,5 @@
 @section('page-script')
     <script type="text/javascript" src="{{ asset('js/prism.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/post.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jssocials.min.js') }}"></script>
 @endsection

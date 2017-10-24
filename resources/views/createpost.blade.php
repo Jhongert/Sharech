@@ -19,6 +19,7 @@
             <div class="col-md-7">
                 <div class="form-group">
                     <textarea id="content" name="content" placeholder="Content">{{ htmlentities($post->content) }}</textarea>
+                    <span class="help-block"></span>
                 </div>
             </div>
 
@@ -27,11 +28,13 @@
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title" class="form-control" placeholder="Title (Max 56 characters)" autofocus value="{{ $post->title }}">
+                    <span class="help-block"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea id="description" name="description" class="form-control" placeholder="Description">{{$post->description}}</textarea>
+                    <span class="help-block"></span>
                 </div>
 
                 <div id="tag-container">

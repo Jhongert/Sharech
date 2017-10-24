@@ -1,5 +1,12 @@
 // Button save on click event
 $(document).ready(function(){
+    //social buttons
+    $("#share").jsSocials({
+        showLabel: false,
+        showCount: false,
+        shares: ["facebook", "email", "twitter", "googleplus", "linkedin", "stumbleupon"]
+    });
+    
     $('#save-post').on('click', function(){
     	/** 
             Check for empty description

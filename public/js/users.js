@@ -3,25 +3,15 @@ $(document).ready(function(){
 	$('#name').on('keyup', function(){
 		var input = $(this).val();
 
-		//if (event.keyCode > 40) {
-			
-			//if(input !== ""){
-				if (requestDelayTimeoutId !== undefined) {
-					clearTimeout(requestDelayTimeoutId);
-				}
+		if (requestDelayTimeoutId !== undefined) {
+			clearTimeout(requestDelayTimeoutId);
+		}
 
-				requestDelayTimeoutId = setTimeout(function(){ loadData(input) }, 400);
-			//}
-		//}
-		// if(!/^[0-9a-za-z]+$/.test(input)){
-		// 	helpBlock($(this), 'Username may only contain alphanumeric characters');
-		// 	return;
-		// }
+		requestDelayTimeoutId = setTimeout(function(){ validate(input) }, 400);
 	});
 });
 
-function loadData(input){
-	console.log(input);
+function validate(input){
 	var $el = $('#name');
 
 	if (input.length < 5 || input.length > 16){
@@ -29,8 +19,8 @@ function loadData(input){
 		$el.css('background-image', 'url("images/invalid.png")');
 		return;
 	}
-	
-	if(!/^[0-9a-za-z]+$/.test(input)){
+
+	if(!/^[0-9a-za-z]+$/gi.test(input)){
 		helpBlock($el, 'Username may only contain alphanumeric characters');
 		$el.css('background-image', 'url("images/invalid.png")');
 		return;
@@ -50,7 +40,6 @@ function loadData(input){
             	$el.css('background-image', 'url("images/invalid.png")');
             	helpBlock($el, "Username is already taken")
             } else {
-            	
             	$el.css('background-image', 'url("images/valid.png")');
             	$el.parent().removeClass('has-error');
             	$el.next().empty();

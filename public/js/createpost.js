@@ -81,7 +81,7 @@ $(document).ready(function(){
 
     function validate(){
         // Remove all error messages and error classes
-        $('span.help-block').remove();
+        $('span.help-block').empty();
         $('.has-error').removeClass('has-error');
 
         // Check if title is empty

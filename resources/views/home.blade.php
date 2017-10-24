@@ -48,7 +48,7 @@
             @if (count($posts) > 0 )
                 @foreach ($posts as $post)
                     <tr>
-                        <td>{{ $post->title }}</td>
+                        <td><a href="{{ url('/post/' . $post->url )}}">{{ $post->title }}</a></td>
                         <td>{{ date("F j, Y, g:i a", strtotime($post->created_at)) }}</td>
                         <td>{{ $post->published == '1' ? 'Yes' : 'No'}}</td>
                         <td><a href="/post/edit/{{ $post->id }}" class="btn btn-default btn-sm btn-edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
