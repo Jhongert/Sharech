@@ -63,7 +63,7 @@ class PostController extends Controller
         $validator = Validator::make($request->all(),[
             'title' => 'bail|required|unique:posts|max:56',
             'content' => 'required',
-            'description' => 'required'
+            'description' => 'required|max:200'
         ], [
             'title.unique' => 'This title already exist'
         ]);
@@ -161,9 +161,12 @@ class PostController extends Controller
     public function update(Request $request, Post $post, $id)
     {
         $validator = Validator::make($request->all(),[
-            'title' => 'bail|required|max:56',
+            'title' => 'bail|required|unique:posts|max:56',
             'content' => 'required',
-            'description' => 'required'
+            'description' => 'required|max:200'
+        ], [
+            'title.unique' => 'This title already exist',
+            'description.max' => 'description can\'t be more than 150 characters long'
         ]);
 
         if ($validator->fails()){

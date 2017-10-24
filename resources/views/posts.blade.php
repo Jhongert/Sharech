@@ -27,6 +27,9 @@
         <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More post</p>
     </div>
     <p class="text-center end-of-page">There are no more posts to show</p>
+    <div id="to-top">
+        <span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+    </div>
 @endsection
 
 @section('page-script')
@@ -34,10 +37,21 @@
     <script type="text/javascript">
         $(document).ready(function(){ 
             
+            // When the user clicks on the button, scroll to the top of the document
+            $('#to-top').on('click', function(){
+                document.body.scrollTop = 0; // For IE and Firefox
+                document.documentElement.scrollTop = 0 // For Chrome, Safari and Opera
+            });
+
             // Infinite scroll
             var end = false;
 
             $(window).scroll(function() {
+                if(document.body.scrollTop > 120 || document.documentElement.scrollTop > 120){
+                    $('#to-top').show();
+                } else {
+                    $('#to-top').hide();
+                }
                 if(end == false && ($(window).scrollTop() + $(window).height() >= $(document).height()))
                 {
                     var last_id = $(".post-item:last").attr("id");

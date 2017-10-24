@@ -247,3 +247,20 @@ ul#tag-holder li {
 .ajax-load, .end-of-page {
 	display: none;
 }
+
+#to-top {
+	position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    display: none;
+    z-index: 999999;
+    background: #5a5a5a none repeat scroll 0 0;
+    opacity: .6;
+    display: none;
+    padding: 8px 12px;
+}
+
+#to-top:hover {
+	opacity: 1;
+}
