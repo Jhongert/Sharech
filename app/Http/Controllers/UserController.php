@@ -25,7 +25,7 @@ class UserController extends Controller
     public function __construct()
     {
         // 
-        $this->middleware('auth', ['except' => ['show']]);
+        $this->middleware('auth', ['except' => ['show','validateUserName']]);
     }
 
     /**
@@ -61,7 +61,7 @@ class UserController extends Controller
                     ->with('passwordOk','Your password has been changed.');
             } else {
                 return back()
-                    ->with('wrongPassword','Your old password is not valid.');
+                    ->with('worngPassword','Your old password is not valid.');
             }
 
         }
@@ -116,5 +116,15 @@ class UserController extends Controller
                 ->orderBy('created_at', 'desc')->get();
 
         return view('posts',['posts' => $posts]);
+    }
+
+    public function validateUserName($name){
+        $user = \App\User::where('name', '=', $name)->get(['name']);
+        
+        if(count($user) > 0){
+            return 'true';
+        }else{
+            return 'false';
+       }
     }
 }

@@ -77,5 +77,6 @@
     @section('page-script')
         <script src="{{ asset('js/prism.js') }}"></script>
         <script src="{{ asset('js/tinymce/tinymce.js') }}"></script>
+        <script src="{{ asset('js/helpers.js') }}"></script>
         <script src="{{ asset('js/createpost.js') }}"></script>
     @endsection

@@ -65,7 +65,7 @@
                         // datatable config
                         $('table').DataTable({
                             "columnDefs": [
-                                { "orderable": false, "targets": [2,3] }
+                                { "orderable": false, "targets": [3] }
                               ],
                             order: [[ 0, "asc" ]],
                             info: false,

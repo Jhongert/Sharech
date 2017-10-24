@@ -9,3 +9,8 @@
     </div>
 </div>
 @endsection
+
+@section('page-script')
+	<script type="text/javascript" src="{{ asset('js/helpers.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/users.js') }}"></script>
+@endsection

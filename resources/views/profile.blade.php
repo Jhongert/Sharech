@@ -41,13 +41,6 @@
             <div id="changepassword-form">
  				<h3>Change password</h3>
 
- 				@if ($message = Session::get('wrongPassword'))
-					<div class="alert alert-danger alert-block">
-						<button type="button" class="close" data-dismiss="alert">×</button>	
-						<strong>{{ $message }}</strong> 
-					</div>
-				@endif
-
  				@if ($message = Session::get('passwordOk'))
 					<div class="alert alert-success alert-block">
 						<button type="button" class="close" data-dismiss="alert">×</button>	
@@ -57,13 +50,13 @@
 
 			    <form  method="POST" action="/user/password">
 			        {{ csrf_field() }}
-			        <div class="form-group{{ $errors->has('oldPassword') ? ' has-error' : '' }}">
+			        <div class="form-group{{ Session::get('worngPassword') ? ' has-error' : '' }}">
 			        	<label>Old password</label>
 			            <input id="oldPassword" type="password" class="form-control" name="oldPassword" required autofocus>
 
-			            @if ($errors->has('oldPassword'))
+			            @if (Session::get('worngPassword'))
 			                <span class="help-block">
-			                    <strong>{{ $errors->first('oldPassword') }}</strong>
+			                    <strong>{{ Session::get('worngPassword') }}</strong>
 			                </span>
 			            @endif
 			        </div>

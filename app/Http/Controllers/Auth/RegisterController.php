@@ -55,8 +55,8 @@ class RegisterController extends Controller
             'email' => 'bail|required|string|email|max:255|unique:users',
             'password' => 'bail|required|string|min:6|confirmed',
         ], [
-            'name.unique' => 'This user name is already taken',
-            'email.unique' => 'This email is already taken'
+            'name.unique' => 'Username is already taken',
+            'email.unique' => 'Email is already taken'
         ]);
     }
 
