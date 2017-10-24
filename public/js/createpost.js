@@ -90,6 +90,7 @@ $(document).ready(function(){
             var $l = $('<label class="text-danger small">');
             $l.text('Enter the title');
             title.after($l).focus();
+            title.addClass('has-error');
             return false;
         }
 

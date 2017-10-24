@@ -15,18 +15,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Storage;
 
-//$s3 = \Storage::disk('s3');
-
-//require ('../vendor/autoload.php');
-
-//$s3 = Aws\S3\S3Client::factory();
-
-//$bucket = getenv('S3_BUCKET_NAME')?: die('No "S3_BUCKET" config var in found in env!');
-
-//use Illuminate\Support\Facades\DB;
-
-
-
 class UserController extends Controller
 {
     /**
@@ -36,7 +24,8 @@ class UserController extends Controller
      */
     public function __construct()
     {
-         $this->middleware('auth', ['except' => ['show']]);
+        // 
+        $this->middleware('auth', ['except' => ['show']]);
     }
 
     /**
@@ -84,41 +73,34 @@ class UserController extends Controller
             'image' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Get the file
-        // $image = $request->file('image')->store(
-        //     'avatar', 's3'
-        // );
-
+        // Get the uploaded image
         $image = $request->file('image');
 
-        // $image = Image::make($image)->resize(200,200);
-        // $path = $image->store('avatar', 's3');
+        // Create a name with current time and image's extension 
         $imagename = time().'.'.$image->getClientOriginalExtension();
-        
-       // $destinationPath = public_path('/avatar/' . $imagename);
 
+        // Create a new image
         $img = Image::make($image->getRealPath());
 
+        // Resize the image
         $img->resize(200, 200, function ($constraint) {
              $constraint->aspectRatio();
         });
 
+        // Encode the new image
         $img = $img->stream();
-        $path = Storage::disk('s3')->put('avatar/' . $imagename, $img->__toString());
-        
 
-        // return back()
-        //     ->with('uploaded',$imagename . ', ' . $path);
+        // Upload the image to s3 in dir "avatar" 
+        Storage::disk('s3')->put('avatar/' . $imagename, $img->__toString());
 
-
-        //$upload = $s3->upload($bucket, $imagename, $img, 'rb', 'public-read');
-        //->save($destinationPath . $input['imagename']);
-        
          // Get current user
         $user = \Auth::User();
+
+        // Chage the user's avatar and saved into database
         $user->avatar = $imagename;
         $user->save();
 
+        // Return to the same view with a successful message
         return back()
              ->with('uploaded','Image Uploaded successfully!');
     }

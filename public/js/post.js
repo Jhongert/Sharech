@@ -48,7 +48,7 @@ $(document).ready(function(){
 
                     // create an img element for user photo
                     var $img = $('<img class="img-circle">');
-                    $img.attr('src', '../avatar/' + data.avatar);
+                    $img.attr('src', 'https://s3.amazonaws.com/radiantimages/avatar/' + data.avatar);
 
                     // create a span element for the user name
                     var $span = $('<span>').text(data.name);

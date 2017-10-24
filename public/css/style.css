@@ -214,3 +214,7 @@ ul#tag-holder li {
 .error-header {
 	font-size: 150px !important;
 }
+
+.help-block {
+	font-size: 14px;
+}

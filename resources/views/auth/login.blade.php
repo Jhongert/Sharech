@@ -13,11 +13,13 @@
                         <p class="alert alert-danger"><strong>Invalid Email or Password</strong></p>
                     @endif
                     <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
-                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus placeholder="E-Mail Address">
+                        <label for="email">E-Mail Address</label>
+                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
                     </div>
 
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <input id="password" type="password" class="form-control" name="password" required placeholder="Password">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" class="form-control" name="password" required>
                     </div>
 
                     <div class="form-group">

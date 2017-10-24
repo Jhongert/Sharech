@@ -3,7 +3,8 @@
     <form  method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus placeholder="User name">
+            <label for="name">User name</label>
+            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
             @if ($errors->has('name'))
                 <span class="help-block">
@@ -13,7 +14,8 @@
         </div>
 
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="E-Mail Address">
+            <label for="email">E-Mail Address</label>
+            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
             @if ($errors->has('email'))
                 <span class="help-block">
@@ -23,7 +25,8 @@
         </div>
 
         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-            <input id="password" type="password" class="form-control" name="password" required placeholder="Password">
+            <label for="password">Password</label>
+            <input id="password" type="password" class="form-control" name="password">
 
             @if ($errors->has('password'))
                 <span class="help-block">
@@ -33,7 +36,8 @@
         </div>
 
         <div class="form-group">
-            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Confirm password">
+            <label for="password_confirmation">Confirm Password</label>
+            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
         </div>
 
         <div class="form-group">
