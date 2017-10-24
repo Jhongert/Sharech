@@ -21,7 +21,7 @@ class PostController extends Controller
          * All users can see posts
          * Only authenticated users can create, store, edit, update and destroy posts
          */        
-        $this->middleware('auth', ['except' => ['index', 'show', 'search']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'search', 'getMore']]);
         
     }
     /**
@@ -32,7 +32,10 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = \App\Post::with('user')->where('published', '=', '1')->orderBy('created_at', 'desc')->get();
+        $posts = \App\Post::with('user')->where('published', '=', '1')
+        ->orderBy('created_at', 'desc')
+        ->take(6)
+        ->get();
 
         return view('posts',['posts' => $posts]);
     }
@@ -218,14 +221,23 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Get more posts.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Post  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function getMore($id)
     {
-        //
+        
+        $posts = \App\Post::with('user')->where([['published', '=', '1'], ['id', '<', $id]])
+        ->orderBy('created_at', 'desc')
+        ->take(6)
+        ->get();
+
+        if(count($posts) > 0){
+            $body = view('data',['posts' => $posts])->render();
+            return response($body)->header('Content-Type', 'text/plain');
+        }
     }
 
     public function search($term){

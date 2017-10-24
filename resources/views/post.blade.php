@@ -68,10 +68,12 @@
     	</div>
     </div>
 
+
 @endsection
 
 @section('page-script')
     <script type="text/javascript" src="{{ asset('js/prism.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/post.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jssocials.min.js') }}"></script>
+    <script type="text/javascript">
 @endsection

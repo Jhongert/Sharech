@@ -243,3 +243,7 @@ ul#tag-holder li {
 	list-style: none;
 	padding-left: 0;
 }
+
+.ajax-load, .end-of-page {
+	display: none;
+}

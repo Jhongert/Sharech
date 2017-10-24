@@ -27,6 +27,7 @@ Route::get('/post/edit/{id}', 'PostController@edit');
 Route::post('/post/store', 'PostController@store');
 Route::post('posts/search/{term}', 'PostController@search');
 Route::put('/post/{id}', 'PostController@update');
+Route::get('/post/getmore/{id}', 'PostController@getMore');
 
 Route::get('/developer/{name}','UserController@show');
 
