@@ -58,13 +58,15 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'title' => 'bail|required|unique|max:56',
+            'title' => 'bail|required|unique:posts|max:56',
             'content' => 'required',
             'description' => 'required'
+        ], [
+            'title.unique' => 'This title already exist'
         ]);
 
         if ($validator->fails()){
-            return 'error';
+            return $validator->errors()->first();
         } else {
 
             $post = new Post;

@@ -131,6 +131,7 @@ ul#tag-holder {
 ul#tag-holder li {
 	float: left;
 	width: 50%;
+	font-size: 14px;
 }
 
 #tag-container{
@@ -184,6 +185,7 @@ ul#tag-holder li {
 .tag {
 	float: left;
 	margin-right: 10px;
+	font-size: 14px;
 }
 
 /* Comments */

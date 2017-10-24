@@ -2,7 +2,7 @@ $(document).ready(function(){
     tinymce.init({
         selector: '#content',
         branding: false,
-        height : 440,
+        height : 420,
         menubar: false,
         plugins: "codesample",
         toolbar: "undo redo | cut copy paste | bold italic underline strikethrough | bullist numlist | codesample"
@@ -73,70 +73,76 @@ $(document).ready(function(){
                 url: url,
                 data: data,
                 success: function(data){
+                    console.log(data);
                     showMsg(data);
                 }
             });
         }
     });
 
-    function validate(){
-        // Remove all error messages
-        $('label.text-danger').remove();
+    // This function is called by validate to display an error message
+    // if the input is invalid
+    function helpBlock(el, message){
+        // Create a span
+        var $span = $('<span class="help-block">');
+        // Insert the message 
+        $span.html('<strong>' + message + '</strong>');
+        // Add the span after the element and set the focus to that element
+        el.after($span).focus();
+        // Add class "has-error to the element's parent"
+        el.parent().addClass('has-error');
+    }
 
-        // Check for empty title
+    function validate(){
+        // Remove all error messages and error classes
+        $('span.help-block').remove();
+        $('.has-error').removeClass('has-error');
+
+        // Check if title is empty
         var title = $('#title');
        
         if (title.val().trim() == ""){
-            var $l = $('<label class="text-danger small">');
-            $l.text('Enter the title');
-            title.after($l).focus();
-            title.addClass('has-error');
+            helpBlock(title, 'Enter the title');
             return false;
         }
 
-        // Check for title longer than 56 characters
+        // Check if title is longer than 56 characters
         if (title.val().trim().length > 56){
-            var $l = $('<label class="text-danger small">');
-            $l.text('Title can\'t be longer than 56 characters, current (' + title.val().trim().length + ')' );
-            title.after($l).focus();
+            helpBlock(title, 'Title can\'t be longer than 56 characters, current (' + title.val().trim().length + ')');
             return false;
         }
 
-        //check for empty description
+        //check if description isempty 
         var description = $('#description');
         if (description.val().trim() == ""){
-            var $l = $('<label class="text-danger small">');
-            $l.text('Enter the description');
-            $('#description').after($l);
+            helpBlock(description, 'Enter the description');
             return false;
         }
 
          // Check for empty content
-        //var content = $('#content');
-       var content = tinymce.get('content').getContent();
+        var textArea = $('#content');
+        var content = tinymce.get('content').getContent();
         if (content.trim() == ""){
-            var $l = $('<label class="text-danger small">');
-            $l.text('Enter the content');
-            $('#content').after($l);
+            helpBlock(textArea, 'Enter the content');
             return false;
         }
 
         return true;
     }
 
-    function showMsg(status){
+    function showMsg(data){
         var msg = $('#msg');
 
         msg.removeClass('alert alert-success alert-danger');
 
         $('#msg-container').css({'height':'58px'});
 
-        if(status == 'ok'){
+        if(data == 'ok'){
             msg.text('Your post has been saved.');
             msg.addClass('alert alert-success');
 
         } else {
-            msg.text('Oops, An error has occurred saving the data.');
+            msg.text('Oops,' + data);
             msg.addClass('alert alert-danger');
         }
         window.setTimeout(function(){
