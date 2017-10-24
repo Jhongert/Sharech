@@ -13,7 +13,7 @@
         		<h1>{{ $post->title }}</h1>
         		<p>{{ $post->description }}</p>
                 <div>{!! $post->content !!}</div>
-                
+
                 <div id="share" class="text-center"></div>
 
 				<div id="comments-container">
@@ -53,6 +53,18 @@
         	</div>
     	</div>
     	<div class="col-md-4">
+            @if(count($related) > 0)
+                <div id="related-posts">
+                    <h3>See also</h3>
+                    <ul>
+                        @foreach ($related as $link)
+                            <li class="related-link">
+                                <a href="{{ url('/post/' . $link->url) }}">{{ $link->title }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
     	</div>
     </div>
 

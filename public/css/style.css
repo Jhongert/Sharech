@@ -231,3 +231,15 @@ ul#tag-holder li {
 #share {
 	margin-top: 20px;
 }
+
+/* Relate posts block*/
+
+#related-posts {
+	background-color: #f8f8f8;
+	padding: 10px;
+}
+
+#related-posts ul {
+	list-style: none;
+	padding-left: 0;
+}
