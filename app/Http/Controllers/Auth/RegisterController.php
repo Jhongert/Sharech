@@ -51,11 +51,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'bail|required|string|max:255|unique:users',
+            'name' => 'bail|required|string|between:5,16|unique:users',
             'email' => 'bail|required|string|email|max:255|unique:users',
             'password' => 'bail|required|string|min:6|confirmed',
         ], [
             'name.unique' => 'Username is already taken',
+            'name.between' => 'Username must be between 5 and 16 characters',
             'email.unique' => 'Email is already taken'
         ]);
     }
