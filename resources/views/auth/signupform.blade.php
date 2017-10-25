@@ -37,6 +37,17 @@
             <label for="password_confirmation">Confirm Password</label>
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
         </div>
+        
+         <div class="form-group{{ $errors->has('CaptchaCode') ? ' has-error' : '' }}">
+            {!! captcha_image_html('RegisterCaptcha') !!}
+            <input class="form-control" type="text" id="CaptchaCode" name="CaptchaCode" placeholder="Captcha">
+            <span class="help-block">
+                @if ($errors->has('CaptchaCode'))
+                    <strong>{{ $errors->first('CaptchaCode') }}</strong>
+                @endif
+            </span>
+        </div>
+
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">

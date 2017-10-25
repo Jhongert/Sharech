@@ -27,13 +27,13 @@
 
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" id="title" name="title" class="form-control" placeholder="Title (Max 56 characters)" autofocus value="{{ $post->title }}">
+                    <input type="text" id="title" name="title" class="form-control" placeholder="Max 56 characters" autofocus value="{{ $post->title }}">
                     <span class="help-block"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea id="description" name="description" class="form-control" placeholder="Description">{{$post->description}}</textarea>
+                    <textarea id="description" name="description" class="form-control" placeholder="Max 150 characters">{{$post->description}}</textarea>
                     <span class="help-block"></span>
                 </div>
 

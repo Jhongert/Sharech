@@ -264,3 +264,11 @@ ul#tag-holder li {
 #to-top:hover {
 	opacity: 1;
 }
+
+#CaptchaCode {
+	margin-top: 5px;
+}
+
+.BDC_CaptchaImageDiv a {
+	opacity: 0;
+}

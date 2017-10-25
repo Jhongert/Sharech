@@ -105,6 +105,12 @@ $(document).ready(function(){
             return false;
         }
 
+        // Check if title is longer than 56 characters
+        if (description.val().trim().length > 150){
+            helpBlock(description, 'Description can\'t be longer than 150 characters, current (' + description.val().trim().length + ')');
+            return false;
+        }
+
          // Check for empty content
         var textArea = $('#content');
         var content = tinymce.get('content').getContent();

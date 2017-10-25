@@ -8,6 +8,7 @@
         "php": ">=5.6.4",
         "ext-gd": "*",
         "aws/aws-sdk-php": "^3.36",
+        "captcha-com/laravel-captcha": "4.*",
         "intervention/image": "^2.4",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
