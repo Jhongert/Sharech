@@ -139,6 +139,6 @@ $(document).ready(function(){
         }
         window.setTimeout(function(){
             $('#msg-container').css('height', 0);
-        }, 3000);
+        }, 5000);
     }
 });

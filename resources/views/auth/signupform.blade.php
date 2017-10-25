@@ -4,7 +4,7 @@
         {{ csrf_field() }}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
             <label for="name">User name</label>
-            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus autocomplete="off">
+            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus autocomplete="off" placeholder="5-16 characters long">
             <span class="help-block">
                 @if ($errors->has('name'))
                     <strong>{{ $errors->first('name') }}</strong>
@@ -24,7 +24,7 @@
 
         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
             <label for="password">Password</label>
-            <input id="password" type="password" class="form-control" name="password" required>
+            <input id="password" type="password" class="form-control" name="password" required placeholder="6 or more characters">
 
             <span class="help-block">
                 @if ($errors->has('password'))

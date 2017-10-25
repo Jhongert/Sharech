@@ -24,7 +24,10 @@
             </div>
 
             <div class="col-md-5">
-
+                <div id="msg-container">
+                    <p id="msg"></p>
+                </div>
+                
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title" class="form-control" placeholder="Max 56 characters" autofocus value="{{ $post->title }}">
@@ -67,9 +70,7 @@
                 </div><!-- /input-group -->
 
                 <div class="form-group">
-                    <div id="msg-container">
-                        <p id="msg"></p>
-                    </div>
+                    
                     <button class="btn btn-primary" id="save" data-id="{{ $post->id }}">Save</button>
                 </div>
             </div>

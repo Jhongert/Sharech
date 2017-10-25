@@ -24,6 +24,7 @@ class PostController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show', 'search', 'getMore']]);
         
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -67,7 +68,7 @@ class PostController extends Controller
         ], [
             'title.unique' => 'This title already exist'
         ]);
-
+        $validator = Validator::make($request->all(),$this->rules, $this->messages);
         if ($validator->fails()){
             return $validator->errors()->first();
         } else {
@@ -160,8 +161,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post, $id)
     {
-        $validator = Validator::make($request->all(),[
-            'title' => 'bail|required|unique:posts|max:56',
+         $validator = Validator::make($request->all(),[
+            'title' => 'bail|required|max:56',
             'content' => 'required',
             'description' => 'required|max:200'
         ], [
@@ -170,7 +171,7 @@ class PostController extends Controller
         ]);
 
         if ($validator->fails()){
-            return 'validator';
+            return $validator->errors()->first();
         } else {
 
             // get the post that we want to update
