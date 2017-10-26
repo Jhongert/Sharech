@@ -10,9 +10,9 @@
     <div class="row">
     	<div class="col-md-8">
     		<div id="post">
-        		<h1>{{ $post->title }}</h1>
+        		<h2>{{ $post->title }}</h2>
+                <div id="by"><span>By <a href="{{ url('/user/' . $post->user->name) }}">{{$post->user->name}}</a> On {{ date("F j, Y", strtotime($post->created_at)) }}</span></div>
                 <div>{!! $post->content !!}</div>
-
                 <div id="share" class="text-center"></div>
 
 				<div id="comments-container">
@@ -31,7 +31,7 @@
 
 					@foreach ($comments as $comment)
                         <div class="comment-item">
-                            <a class="avatar" href="{{ url('/developer/' . $comment->user->name) }}"><img class="img-circle" src="{{ asset('avatar/' . $comment->user->avatar) }}"> <span>{{ $comment->user->name }}</span></a>
+                            <a class="avatar" href="{{ url('/user/' . $comment->user->name) }}"><img class="img-circle" src="{{ asset('avatar/' . $comment->user->avatar) }}"> <span>{{ $comment->user->name }}</span></a>
 
 						
 						    <div>{{ $comment->content }}</div>
@@ -45,7 +45,7 @@
 		                    <textarea id="content" name="content" placeholder="Add a comment"></textarea>
 		                </div>
             			<div class="form-group clearfix">
-                    		<button class="btn btn-primary" id="save-post" data-post-id={{ $post->id }}>Post</button>
+                    		<button class="btn btn-primary" id="save-post" data-post-id="{{ $post->id }}">Post</button>
                 		</div>
 					</div>
 			    @endif

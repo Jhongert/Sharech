@@ -29,8 +29,6 @@ Route::post('posts/search/{term}', 'PostController@search');
 Route::put('/post/{id}', 'PostController@update');
 Route::get('/post/getmore/{id}', 'PostController@getMore');
 
-Route::get('/developer/{name}','UserController@show');
-
 // Comments route
 Route::resource('comment', 'CommentController');
 
@@ -38,9 +36,11 @@ Route::resource('comment', 'CommentController');
 Route::get('/tag/{name}', 'TagController@show');
 
 // User rout
+
 Route::get('/user/profile', 'UserController@profile');
 Route::post('/user/image', 'UserController@imageUpload');
 Route::post('/user/password', 'UserController@changePassword');
 Route::post('/user/validate/{name}', 'UserController@validateUserName');
+Route::get('/user/{name}','UserController@show');
 
 Auth::routes();

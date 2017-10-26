@@ -75,7 +75,7 @@
                 </div>
             </div>
         </div>
-    
+
     @endsection
 
     @section('page-script')
