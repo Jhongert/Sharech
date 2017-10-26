@@ -1,12 +1,12 @@
 <?php
 
-return [
-
     $url = parse_url(getenv("JAWSDB_URL"));
     $host = $url["host"];
     $username = $url["user"];
     $password = $url["pass"];
     $database = ltrim($url["path"], '/');
+
+return [
     /*
     |--------------------------------------------------------------------------
     | Default Database Connection Name
