@@ -66,9 +66,10 @@ class PostController extends Controller
             'content' => 'required',
             'description' => 'required|max:200'
         ], [
-            'title.unique' => 'This title already exist'
+            'title.unique' => 'This title already exist',
+            'description.max' => 'description can\'t be more than 150 characters long'
         ]);
-        $validator = Validator::make($request->all(),$this->rules, $this->messages);
+        
         if ($validator->fails()){
             return $validator->errors()->first();
         } else {
