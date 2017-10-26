@@ -118,6 +118,12 @@ class PostController extends Controller
 
         $comments = \App\Comment::with('user')->where('post_id', '=', $post->id)->get();
 
+         $relatedToUser = \App\Post::where('user_id', '=', $post->user_id)
+            ->where('id', '<>', $post->id)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get(['title', 'url']);
+
         $rand = rand(0,count($post->tags) - 1);
         $randTag = $post->tags[$rand]->name;
 
@@ -131,7 +137,8 @@ class PostController extends Controller
 
         return view('post', array('post' => $post,
                     'comments' => $comments, 
-                    'related' => $related));
+                    'related' => $related,
+                    'relatedToUser' => $relatedToUser));
     }
 
     /**

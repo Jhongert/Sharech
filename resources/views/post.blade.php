@@ -11,7 +11,6 @@
     	<div class="col-md-8">
     		<div id="post">
         		<h1>{{ $post->title }}</h1>
-        		<p>{{ $post->description }}</p>
                 <div>{!! $post->content !!}</div>
 
                 <div id="share" class="text-center"></div>
@@ -55,11 +54,24 @@
     	<div class="col-md-4">
             @if(count($related) > 0)
                 <div id="related-posts">
-                    <h3>See also</h3>
+                    <h4 class="text-center">Related to this post</h4>
                     <ul>
                         @foreach ($related as $link)
                             <li class="related-link">
                                 <a href="{{ url('/post/' . $link->url) }}">{{ $link->title }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if(count($relatedToUser) > 0)
+                <div id="related-user">
+                    <h4 class="text-center">More from {{ $post->user->name }}</h4>
+                    <ul>
+                        @foreach ($relatedToUser as $link2)
+                            <li class="related-link">
+                                <a href="{{ url('/post/' . $link2->url) }}">{{ $link2->title }}</a>
                             </li>
                         @endforeach
                     </ul>

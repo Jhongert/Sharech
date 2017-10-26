@@ -5,7 +5,7 @@ $(document).ready(function(){
         height : 420,
         menubar: false,
         plugins: "codesample",
-        toolbar: "undo redo | cut copy paste | bold italic underline strikethrough | bullist numlist | codesample"
+        toolbar: "undo redo removeformat | cut copy paste | bold italic underline strikethrough | bullist numlist | codesample"
     });
 
     var tags = [];

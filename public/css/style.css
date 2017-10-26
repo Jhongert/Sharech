@@ -134,7 +134,7 @@ ul#tag-holder li {
 	font-size: 14px;
 }
 
-#tag-container{
+#tag-container, #related-posts, #related-user{
 	background-color: #fff;
 	padding: 0 10px;
 	margin-bottom: 20px;
@@ -193,7 +193,8 @@ ul#tag-holder li {
 #comments-form, #comments-container {
 	border-top: 1px solid #eee;
     padding-top: 20px;
-    margin-top: 20px;
+    margin: 20px 0;
+
 }
 
 .comment-item {
@@ -234,12 +235,13 @@ ul#tag-holder li {
 
 /* Relate posts block*/
 
-#related-posts {
+/*#related-posts, #related-user {
 	background-color: #f8f8f8;
 	padding: 10px;
-}
+	margin-bottom: 20px;
+}*/
 
-#related-posts ul {
+#related-posts ul, #related-user ul{
 	list-style: none;
 	padding-left: 0;
 }

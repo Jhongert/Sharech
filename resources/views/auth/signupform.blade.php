@@ -4,7 +4,7 @@
         {{ csrf_field() }}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
             <label for="name">User name</label>
-            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus autocomplete="off" placeholder="5-16 characters long">
+            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus autocomplete="off" placeholder="Alphanumeric, 5-16 characters">
             <span class="help-block">
                 @if ($errors->has('name'))
                     <strong>{{ $errors->first('name') }}</strong>
