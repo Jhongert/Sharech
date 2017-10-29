@@ -54,21 +54,21 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
-        's3' => [
-             'driver' => 's3',
-             'key' => 'AKIAJRNFX4IB4VGE5XZQ',
-             'secret' => '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',
-             'region' => 'us-east-1',
-             'bucket' => 'radiantimages'
-         ],
-
         // 's3' => [
-        //     'driver' => 's3',
-        //     'key' => env('AWS_ACCESS_KEY_ID'),
-        //     'secret' => env('AWS_SECRET_ACCESS_KEY'),
-        //     'region' => env('AWS_REGION'),
-        //     'bucket' => env('AWS_BUCKET_NAME'),
-        // ],
+        //      'driver' => 's3',
+        //      'key' => 'AKIAJRNFX4IB4VGE5XZQ',
+        //      'secret' => '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',
+        //      'region' => 'us-east-1',
+        //      'bucket' => 'radiantimages'
+        //  ],
+
+        's3' => [
+            'driver' => 's3',
+            'key' => getenv('AWS_ACCESS_KEY_ID'),
+            'secret' => getenv('AWS_SECRET_ACCESS_KEY'),
+            'region' => getenv('AWS_REGION'),
+            'bucket' => getenv('AWS_BUCKET_NAME'),
+        ],
 
     ],
 
