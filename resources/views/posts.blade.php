@@ -56,7 +56,6 @@
                 }
                 if(end == false && ($(window).scrollTop() + $(window).height() >= $(document).height()))
                 {
-                    var last_id = $(".post-item:last").attr("id");
                     loadMoreData(offset);
                     offset += 6;
 
