@@ -238,12 +238,12 @@ class PostController extends Controller
      * @param  \App\Post  $id
      * @return \Illuminate\Http\Response
      */
-    public function getMore($id)
+    public function getMore($offset)
     {
-        
-        $posts = \App\Post::with('user')->where([['published', '=', '1'], ['id', '<', $id]])
+        $posts = \App\Post::with('user')->where('published', '=', '1')
         ->orderBy('created_at', 'desc')
-        ->take(6)
+        ->offset($offset)
+        ->limit(6)
         ->get();
 
         if(count($posts) > 0){

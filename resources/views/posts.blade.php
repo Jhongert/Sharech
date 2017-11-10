@@ -37,6 +37,8 @@
     <script type="text/javascript">
         $(document).ready(function(){ 
             
+            var offset = 6;
+
             // When the user clicks on the button, scroll to the top of the document
             $('#to-top').on('click', function(){
                 document.body.scrollTop = 0; // For IE and Firefox
@@ -55,14 +57,16 @@
                 if(end == false && ($(window).scrollTop() + $(window).height() >= $(document).height()))
                 {
                     var last_id = $(".post-item:last").attr("id");
-                    loadMoreData(last_id);
+                    loadMoreData(offset);
+                    offset += 6;
+
                 }
             });
 
-            function loadMoreData(last_id){
+            function loadMoreData(offset){
                 $.ajax(
                     {
-                        url: '/post/getmore/' + last_id,
+                        url: '/post/getmore/' + offset,
                         type: "get",
                         beforeSend: function()
                         {

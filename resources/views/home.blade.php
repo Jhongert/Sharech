@@ -16,15 +16,15 @@
                         <h1 class="text-center">A better place for developers</h1>
                     </div>
                     <div class="col-xs-4">
-            		    <h1 class="text-center"><i class="fa fa-share-alt fa-3x"></i></h1>
+            		    <h1 class="text-center"><i class="fa fa-share-alt fa-2x"></i></h1>
                         <h1 class="text-center">Share</h1>
                     </div>
                     <div class="col-xs-4">
-                        <h1 class="text-center"><i class="fa fa-search fa-3x"></i></h1>
+                        <h1 class="text-center"><i class="fa fa-search fa-2x"></i></h1>
                         <h1 class="text-center">Search</h1>
                     </div>
                     <div class="col-xs-4">
-                        <h1 class="text-center"><i class="fa fa-users fa-3x"></i></h1>
+                        <h1 class="text-center"><i class="fa fa-users fa-2x"></i></h1>
                         <h1 class="text-center">Connect</h1>
             		</div>
             	</div>
