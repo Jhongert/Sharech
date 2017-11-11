@@ -21,7 +21,7 @@ class PostController extends Controller
          * All users can see posts
          * Only authenticated users can create, store, edit, update and destroy posts
          */        
-        $this->middleware('auth', ['except' => ['index', 'show', 'search', 'getMore']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'search', 'getPosts', 'getPostsByTagName', 'getPostsByUserName']]);
         
     }
 
@@ -233,18 +233,61 @@ class PostController extends Controller
     }
 
     /**
-     * Get more posts.
+     * Get posts.
      *
-     * @param  \App\Post  $id
+     * @param  \App\Post  $offset
      * @return \Illuminate\Http\Response
      */
-    public function getMore($offset)
+    public function getPosts($offset)
     {
         $posts = \App\Post::with('user')->where('published', '=', '1')
         ->orderBy('created_at', 'desc')
         ->offset($offset)
         ->limit(6)
         ->get();
+
+        if(count($posts) > 0){
+            $body = view('data',['posts' => $posts])->render();
+            return response($body)->header('Content-Type', 'text/plain');
+        }
+    }
+
+    /**
+    * Get posts by tag name
+    * @param  \$tag $offset
+    * @return \Illuminate\Http\Response
+    */
+    public function getPostsByTagName($tag, $offset){
+        $posts = \App\Post::with('user')->whereHas('tags', function($q) use ($tag){
+            $q->where('name', '=', $tag);
+        })
+            ->where('published', '=', '1')
+            ->orderBy('created_at', 'desc')
+            ->offset($offset)
+            ->limit(6)
+            ->get();
+
+        if(count($posts) > 0){
+            $body = view('data',['posts' => $posts])->render();
+            return response($body)->header('Content-Type', 'text/plain');
+        }
+    }
+
+     /**
+    * Get posts by user name
+    * @param  \$user $offset
+    * @return \Illuminate\Http\Response
+    */
+    public function getPostsByUserName($user, $offset){
+        $user = \App\User::where('name', '=', $user)->firstOrFail();
+
+        $posts = \App\Post::with('user')
+                ->where('published', '=', '1')
+                ->where('user_id', '=', $user->id)
+                ->orderBy('created_at', 'desc')
+                ->offset($offset)
+                ->limit(6)
+                ->get();
 
         if(count($posts) > 0){
             $body = view('data',['posts' => $posts])->render();

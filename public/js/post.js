@@ -64,7 +64,7 @@ $(document).ready(function(){
                     // create a link to hold user photo and name
                     // and append the img and span to the link ($a)
                     var $a = $('<a>');
-                    $a.attr('href', '/developer/' + data.name).addClass('avatar');
+                    $a.attr('href', '/posts/user/' + data.name).addClass('avatar');
                     $a.append($img).append($span);
 
                     // add $a element to $div elemente (comment-item)

@@ -14,12 +14,9 @@
     </div>
 
     <div class="row" id="posts-container">
-        @if (isset($tag))
-            <div class="col-sm-12">
-                <h4>Posts tagged with {{$tag}}</h4>
-            </div>
-        @endif
-
+        <div class="col-sm-12">
+            <h4>Posts tagged with {{$tag}}</h4>
+        </div>
         @if (count($posts) > 0)
             @include('data')
         @else
@@ -41,20 +38,8 @@
     <script src="{{ asset('js/jquery.easy-autocomplete.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function(){ 
+            
             var offset = 6;
-
-            var path = window.location.pathname;
-            var params = path.split('/');
-
-            if (!params[2]) {
-                var url = '/posts/getPosts/';
-            } else if (params[2] === 'tag') {
-                var url = '/posts/getPostsByTagName/' + params[3] + '/';
-            } else {
-                var url = '/posts/getPostsByUserName/' + params[3] + '/';
-            }
-
-             console.log(url);
 
             // When the user clicks on the button, scroll to the top of the document
             $('#to-top').on('click', function(){
@@ -75,13 +60,14 @@
                 {
                     getPosts(offset);
                     offset += 6;
+
                 }
             });
 
             function getPosts(offset){
                 $.ajax(
                     {
-                        url: url + offset,
+                        url: '/post/getPosts/' + offset,
                         type: "get",
                         beforeSend: function()
                         {

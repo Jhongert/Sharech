@@ -11,7 +11,7 @@
     	<div class="col-md-8">
     		<div id="post">
         		<h2>{{ $post->title }}</h2>
-                <div id="by"><span>By <a href="{{ url('/user/' . $post->user->name) }}">{{$post->user->name}}</a> On {{ date("F j, Y", strtotime($post->created_at)) }}</span></div>
+                <div id="by"><span>By <a href="{{ url('posts/user/' . $post->user->name) }}">{{$post->user->name}}</a> On {{ date("F j, Y", strtotime($post->created_at)) }}</span></div>
                 <div>{!! $post->content !!}</div>
                 <div id="share" class="text-center"></div>
 
@@ -21,7 +21,7 @@
                             <ul>
                                 <li class="tag"><i class="fa fa-tag" aria-hidden="true"></i></li>
                             @foreach ($post->tags as $tag)
-                                <li class="tag"><a href="{{ url('/tag/' . $tag->name)}}">{{$tag->name}}</a></li>
+                                <li class="tag"><a href="{{ url('posts/tag/' . $tag->name)}}">{{$tag->name}}</a></li>
                             @endforeach
                             </ul>
                         </div>
@@ -31,9 +31,8 @@
 
 					@foreach ($comments as $comment)
                         <div class="comment-item">
-                            <a class="avatar" href="{{ url('/user/' . $comment->user->name) }}"><img class="img-circle" src="{{ asset('avatar/' . $comment->user->avatar) }}"> <span>{{ $comment->user->name }}</span></a>
+                            <a class="avatar" href="{{ url('posts/user/' . $comment->user->name) }}"><img class="img-circle" src="{{ asset('avatar/' . $comment->user->avatar) }}"> <span>{{ $comment->user->name }}</span></a>
 
-						
 						    <div>{{ $comment->content }}</div>
                         </div>
 					@endforeach

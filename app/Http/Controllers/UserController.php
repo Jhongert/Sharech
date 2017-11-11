@@ -113,7 +113,9 @@ class UserController extends Controller
         $posts = \App\Post::with('user')
                 ->where('published', '=', '1')
                 ->where('user_id', '=', $user->id)
-                ->orderBy('created_at', 'desc')->get();
+                ->orderBy('created_at', 'desc')
+                ->take(6)
+                ->get();
 
         return view('posts',['posts' => $posts]);
     }

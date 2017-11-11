@@ -12,9 +12,6 @@
 */
 
 // Home route
-Route::get('/test', function(){
-	return view('test');
-});
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
@@ -27,13 +24,16 @@ Route::get('/post/edit/{id}', 'PostController@edit');
 Route::post('/post/store', 'PostController@store');
 Route::post('posts/search/{term}', 'PostController@search');
 Route::put('/post/{id}', 'PostController@update');
-Route::get('/post/getmore/{offset}', 'PostController@getMore');
+Route::get('/posts/getPosts/{offset}', 'PostController@getPosts');
+Route::get('/posts/getPostsByTagName/{tag}/{offset}', 'PostController@getPostsByTagName');
+Route::get('/posts/getPostsByUserName/{tag}/{offset}', 'PostController@getPostsByUserName');
 
 // Comments route
 Route::resource('comment', 'CommentController');
 
 // Tags route
-Route::get('/tag/{name}', 'TagController@show');
+Route::get('posts/tag/{name}', 'TagController@show');
+Route::get('/posts/user/{name}','UserController@show');
 
 // User rout
 
@@ -41,6 +41,6 @@ Route::get('/user/profile', 'UserController@profile');
 Route::post('/user/image', 'UserController@imageUpload');
 Route::post('/user/password', 'UserController@changePassword');
 Route::post('/user/validate/{name}', 'UserController@validateUserName');
-Route::get('/user/{name}','UserController@show');
+
 
 Auth::routes();

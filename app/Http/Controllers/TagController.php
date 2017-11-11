@@ -46,16 +46,15 @@ class TagController extends Controller
      */
     public function show($name)
     {
-
-        $n = $name;
         $posts = \App\Post::with('user')->whereHas('tags', function($q) use ($name){
             $q->where('name', '=', $name);
         })
             ->where('published', '=', '1')
             ->orderBy('created_at', 'desc')
+            ->take(6)
             ->get();
 
-        return view('posts',['posts' => $posts]);
+        return view('posts',['posts' => $posts, 'tag' => $name]);
     }
 
     /**
