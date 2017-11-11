@@ -107,17 +107,6 @@ class UserController extends Controller
 
     public function show($name)
     {
-        $user = \App\User::where('name', '=', $name)->firstOrFail();
-
-
-        $posts = \App\Post::with('user')
-                ->where('published', '=', '1')
-                ->where('user_id', '=', $user->id)
-                ->orderBy('created_at', 'desc')
-                ->take(6)
-                ->get();
-
-        return view('posts',['posts' => $posts]);
     }
 
     public function validateUserName($name){

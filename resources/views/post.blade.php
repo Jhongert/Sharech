@@ -57,7 +57,7 @@
                     <ul>
                         @foreach ($related as $link)
                             <li class="related-link">
-                                <a href="{{ url('/post/' . $link->url) }}">{{ $link->title }}</a>
+                                <a href="{{ url('/post/' . $link->url) }}"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ $link->title }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -70,7 +70,7 @@
                     <ul>
                         @foreach ($relatedToUser as $link2)
                             <li class="related-link">
-                                <a href="{{ url('/post/' . $link2->url) }}">{{ $link2->title }}</a>
+                                <a href="{{ url('/post/' . $link2->url) }}"><i class="fa fa-angle-right" aria-hidden="true"></i> {{ $link2->title }}</a>
                             </li>
                         @endforeach
                     </ul>

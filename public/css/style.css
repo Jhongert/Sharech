@@ -253,6 +253,7 @@ ul#tag-holder li {
 #related-posts ul, #related-user ul{
 	list-style: none;
 	padding-left: 0;
+	font-size: 12px;
 }
 
 .ajax-load, .end-of-page {
