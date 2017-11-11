@@ -257,7 +257,7 @@ class PostController extends Controller
     * @param  \$tag $offset
     * @return \Illuminate\Http\Response
     */
-    public function getPostsByTagName($tag, $offset){
+    public function getPostsByTagName($tag, $offset = 0){
         $posts = \App\Post::with('user')->whereHas('tags', function($q) use ($tag){
             $q->where('name', '=', $tag);
         })
@@ -266,6 +266,10 @@ class PostController extends Controller
             ->offset($offset)
             ->limit(6)
             ->get();
+
+        if ($offset == 0) {
+            return view('posts',['posts' => $posts, 'tag' => $tag]);
+        }
 
         if(count($posts) > 0){
             $body = view('data',['posts' => $posts])->render();
@@ -278,7 +282,7 @@ class PostController extends Controller
     * @param  \$user $offset
     * @return \Illuminate\Http\Response
     */
-    public function getPostsByUserName($user, $offset){
+    public function getPostsByUserName($user, $offset = 0){
         $user = \App\User::where('name', '=', $user)->firstOrFail();
 
         $posts = \App\Post::with('user')
@@ -288,6 +292,10 @@ class PostController extends Controller
                 ->offset($offset)
                 ->limit(6)
                 ->get();
+
+        if ($offset == 0){
+            return view('posts',['posts' => $posts]);
+        }
 
         if(count($posts) > 0){
             $body = view('data',['posts' => $posts])->render();
