@@ -11,23 +11,24 @@
         @if(Auth::guest())
             <div class="col-md-6">
            
-            	<div class="row">
+            	<!-- <div class="row"> -->
                     <div style="margin: 20px 0">
-                        <h1 class="text-center">A better place for developers</h1>
+                        <h1>A better place for developers</h1>
                     </div>
-                    <div class="col-xs-4">
-            		    <h1 class="text-center"><i class="fa fa-share-alt fa-2x"></i></h1>
-                        <h1 class="text-center">Share</h1>
-                    </div>
-                    <div class="col-xs-4">
-                        <h1 class="text-center"><i class="fa fa-search fa-2x"></i></h1>
-                        <h1 class="text-center">Search</h1>
-                    </div>
-                    <div class="col-xs-4">
-                        <h1 class="text-center"><i class="fa fa-users fa-2x"></i></h1>
-                        <h1 class="text-center">Connect</h1>
-            		</div>
-            	</div>
+                    <!-- <div class="col-xs-4"> -->
+
+            		    <h2><i class="fa fa-share-alt"></i> Share</h2>
+                        <!-- <h1 class="text-center">Share</h1> -->
+                    <!-- </div>
+                    <div class="col-xs-4"> -->
+                        <h2><i class="fa fa-search"></i> Search</h2>
+                        <!-- <h1 class="text-center">Search</h1> -->
+                    <!-- </div>
+                    <div class="col-xs-4"> -->
+                        <h2><i class="fa fa-users"></i> Connect</h2>
+                       <!--  <h1 class="text-center">Connect</h1> -->
+            		<!-- </div> -->
+            	<!-- </div> -->
             </div>
             <div class="col-md-6">
                 @include('auth.signupform')

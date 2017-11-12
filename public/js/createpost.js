@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    // tinymce editor configuration
     tinymce.init({
         selector: '#content',
         branding: false,
@@ -41,6 +42,7 @@ $(document).ready(function(){
 
 
     $('#save').on('click', function(event){
+        $(this).attr('disabled', 'disabled');
 
         if(validate()){
 
@@ -73,6 +75,10 @@ $(document).ready(function(){
                 url: url,
                 data: data,
                 success: function(data){
+                    if(data.id){
+                        console.log(data);
+                        $('#save').data('id', data.id);
+                    }
                     showMsg(data);
                 }
             });
@@ -129,7 +135,7 @@ $(document).ready(function(){
 
         $('#msg-container').css({'height':'58px'});
 
-        if(data == 'ok'){
+        if(data.success){
             msg.text('Your post has been saved.');
             msg.addClass('alert alert-success');
 
@@ -139,6 +145,7 @@ $(document).ready(function(){
         }
         window.setTimeout(function(){
             $('#msg-container').css('height', 0);
+            $('#save').removeAttr('disabled');
         }, 5000);
     }
 });

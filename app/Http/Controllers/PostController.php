@@ -99,10 +99,12 @@ class PostController extends Controller
                 }
 
                 DB::commit();
-                return 'ok';
+                return Response()->json(['success' => true, 'id' => $post->id]);
+                //return $post->id;
             } catch(Exception $e) {
                DB::rollback();
-                return 'error';
+               return Response()->json(['success' => flase]);
+               // return 'error';
             }
         }
     }
@@ -224,10 +226,12 @@ class PostController extends Controller
                 }
 
                 DB::commit();
-                return 'ok';
+                return Response()->json(['success' => true, 'id' => $post->id]);
+                //return 'ok';
             } catch(Exception $e) {
                DB::rollback();
-                return 'catch';
+               return Response()->json(['success' => false]);
+               // return 'catch';
             }
         } 
     }
