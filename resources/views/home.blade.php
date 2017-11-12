@@ -11,14 +11,14 @@
         @if(Auth::guest())
             <div class="col-md-6">
                 <div style="margin: 20px 0">
-                        <h1 style="font-size: 5em">Sharech</h1>
+                        <h1 style="font-size: 5em; text-align: center">Sharech</h1>
                     </div>
             	<div class="row">
                     <div class="col-xs-6">
-            		    <h2><i class="fa fa-share-alt"></i> Share</h2>
+            		    <h2 class="text-center"><i class="fa fa-share-alt"></i> Share</h2>
                     </div>
                     <div class="col-xs-6"> 
-                        <h2><i class="fa fa-search"></i> Search</h2>
+                        <h2 class="text-center"><i class="fa fa-search"></i> Search</h2>
                     </div>
             	</div>
                 <p>Sharech is a social sharing site for developers where they can post, search and tag articules, pieces of code, tutorials, or anything developer related they'd like to share.</p>
