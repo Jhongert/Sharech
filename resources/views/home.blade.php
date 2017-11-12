@@ -21,7 +21,7 @@
                         <h2 class="text-center"><i class="fa fa-search"></i> Search</h2>
                     </div>
             	</div>
-                <p>Sharech is a social sharing site for developers where they can post, search and tag articules, pieces of code, tutorials, or anything developer related they'd like to share.</p>
+                <p>Sharech is a social sharing site for developers where they can post, search and tag articles, pieces of code, tutorials, or anything developer related they'd like to share.</p>
             </div>
             <div class="col-md-6">
                 @include('auth.signupform')
