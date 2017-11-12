@@ -10,25 +10,18 @@
     <div class="row">
         @if(Auth::guest())
             <div class="col-md-6">
-           
-            	<!-- <div class="row"> -->
-                    <div style="margin: 20px 0">
-                        <h1>A better place for developers</h1>
+                <div style="margin: 20px 0">
+                        <h1 style="font-size: 5em">Sharech</h1>
                     </div>
-                    <!-- <div class="col-xs-4"> -->
-
+            	<div class="row">
+                    <div class="col-xs-6">
             		    <h2><i class="fa fa-share-alt"></i> Share</h2>
-                        <!-- <h1 class="text-center">Share</h1> -->
-                    <!-- </div>
-                    <div class="col-xs-4"> -->
+                    </div>
+                    <div class="col-xs-6"> 
                         <h2><i class="fa fa-search"></i> Search</h2>
-                        <!-- <h1 class="text-center">Search</h1> -->
-                    <!-- </div>
-                    <div class="col-xs-4"> -->
-                        <h2><i class="fa fa-users"></i> Connect</h2>
-                       <!--  <h1 class="text-center">Connect</h1> -->
-            		<!-- </div> -->
-            	<!-- </div> -->
+                    </div>
+            	</div>
+                <p>Sharech is a social sharing site for developers where they can post, search and tag articules, pieces of code, tutorials, or anything developer related they'd like to share.</p>
             </div>
             <div class="col-md-6">
                 @include('auth.signupform')
